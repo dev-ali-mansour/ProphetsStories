@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">قصص الأنبياء</string>
+    <string name="action_settings">إعدادات التطبيق</string>
+    <string name="action_about">حول التطبيق</string>
+    <string name="text_version">إصدار رقم: </string>
+    <string name="text_developer">"تصميم وتطوير م/ علي منصور"</string>
+    <string name="text_about">"تطبيق قصص الأنبياء هو تطبيق مجاني من طيبة ديف للبرمجيات ، حيث يمكنك من خلال التطبيق قراءة قصص الأنبياء والرسل عليهم السلام بدءاً من أبينا آدم وحتى سيدنا محمد صلى الله عليه وسلم خاتم الأنبياء والمرسلين. كما يمكنك التطبيق من مشاركة القصة مع أصدقائك  وعلى الشبكات الاجتماعية المختلفة بكل سهولة."</string>
+    <string name="desc_logo_image">Logo Image</string>
+    <string name="desc_google_plus_icon">Google plus icon</string>
+    <string name="desc_linked_in_icon">Linked in icon</string>
+    <string name="desc_youtube_icon">Youtube icon</string>
+    <string name="desc_twitter_icon">Twitter icon</string>
+    <string name="desc_facebook_icon">Facebook icon</string>
+    <string name="action_rate">تقييم التطبيق</string>
+    <string name="action_share_app">مشاركة التطبيق</string>
+    <string name="action_size_down">تصغير حجم الخط</string>
+    <string name="action_size_up">تكبير حجم الخط</string>
+    <string name="action_share">مشاركة المحتوى</string>
+    <string name="action_our_apps">تطبيقاتنا الأخرى</string>
+    <string name="text_update_alert_message">لقد أصبح إصدار التطبيق الخاص بك قديماً. يرجى تحديثه لآخر إصدار لضمان الاستمتاع بكافة خدمات ومزايا التطبيق.</string>
+    <string name="text_update_alert_title">تحديث التطبيق</string>
+    <string name="btn_update_alert_update">تحديث الآن</string>
+    <string name="text_location_permission_denied">تم رفض منح التطبيق صلاحية تحديد المواقع.</string>
+</resources>
