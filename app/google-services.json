@@ -1,0 +1,145 @@
+{
+  "project_info": {
+    "project_number": "393365690292",
+    "firebase_url": "https://my-bills-12dce.firebaseio.com",
+    "project_id": "my-bills-12dce",
+    "storage_bucket": "my-bills-12dce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393365690292:android:a328d56814589895",
+        "android_client_info": {
+          "package_name": "com.tibadev.alimansour.mybills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393365690292:android:fab67097a54bc498",
+        "android_client_info": {
+          "package_name": "com.tibadev.androidcodes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393365690292:android:17fb849366b81085",
+        "android_client_info": {
+          "package_name": "com.tibadev.idealweight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393365690292:android:413bcbd90f02a39d",
+        "android_client_info": {
+          "package_name": "com.tibadev.alimansour.prophetstories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
