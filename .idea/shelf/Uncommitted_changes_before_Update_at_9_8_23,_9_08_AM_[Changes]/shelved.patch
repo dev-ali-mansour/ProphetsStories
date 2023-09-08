@@ -1,0 +1,3109 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\n\nandroid {\n    compileSdkVersion 25\n    buildToolsVersion '25.0.0'\n    defaultConfig {\n        applicationId \"com.tibadev.alimansour.prophetstories\"\n        minSdkVersion 17\n        targetSdkVersion 25\n        versionCode 6\n        versionName '2.4.0'\n    }\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'\n        }\n    }\n    productFlavors {\n    }\n}\n\ndependencies {\n    compile fileTree(include: ['*.jar'], dir: 'libs')\n    testCompile 'junit:junit:4.12'\n    compile 'com.android.support:appcompat-v7:25.0.0'\n    compile 'com.android.support:design:25.0.0'\n    compile 'com.google.firebase:firebase-core:9.0.2'\n    compile 'com.google.firebase:firebase-crash:9.0.2'\n    compile 'com.google.firebase:firebase-messaging:9.0.2'\n    compile 'org.jsoup:jsoup:1.9.2'\n    compile files('libs/StartAppInApp-3.5.1.jar')\n}\napply plugin: 'com.google.gms.google-services'\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/build.gradle	(date 1694156572742)
+@@ -1,14 +1,19 @@
+ apply plugin: 'com.android.application'
++apply plugin: 'com.google.gms.google-services'
++apply plugin: 'com.google.firebase.crashlytics'
++apply plugin: 'org.jetbrains.kotlin.android'
++apply plugin: 'kotlin-android'
+ 
+ android {
+-    compileSdkVersion 25
+-    buildToolsVersion '25.0.0'
++    compileSdk 34
+     defaultConfig {
+         applicationId "com.tibadev.alimansour.prophetstories"
+-        minSdkVersion 17
+-        targetSdkVersion 25
+-        versionCode 6
+-        versionName '2.4.0'
++        minSdk 21
++        targetSdk 34
++        multiDexEnabled true
++        vectorDrawables.useSupportLibrary = true
++        versionCode 7
++        versionName '2.5.0'
+     }
+     buildTypes {
+         release {
+@@ -18,17 +23,31 @@
+     }
+     productFlavors {
+     }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_17
++        targetCompatibility JavaVersion.VERSION_17
++    }
++    namespace "com.tibadev.alimansour.prophetstories"
++}
++repositories {
++    mavenCentral()
++    google()
+ }
+ 
+ dependencies {
+-    compile fileTree(include: ['*.jar'], dir: 'libs')
+-    testCompile 'junit:junit:4.12'
+-    compile 'com.android.support:appcompat-v7:25.0.0'
+-    compile 'com.android.support:design:25.0.0'
+-    compile 'com.google.firebase:firebase-core:9.0.2'
+-    compile 'com.google.firebase:firebase-crash:9.0.2'
+-    compile 'com.google.firebase:firebase-messaging:9.0.2'
+-    compile 'org.jsoup:jsoup:1.9.2'
+-    compile files('libs/StartAppInApp-3.5.1.jar')
+-}
+-apply plugin: 'com.google.gms.google-services'
++    implementation fileTree(include: ['*.jar'], dir: 'libs')
++    implementation files('libs/StartAppInApp-3.5.1.jar')
++    implementation 'androidx.appcompat:appcompat:1.6.1'
++    implementation 'com.google.android.material:material:1.9.0'
++    implementation 'androidx.browser:browser:1.6.0'
++    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
++    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
++    implementation platform("com.google.firebase:firebase-bom:31.1.1")
++    implementation 'com.google.firebase:firebase-crashlytics-ktx'
++    implementation 'com.google.firebase:firebase-messaging-ktx'
++    implementation "com.google.android.gms:play-services-ads:22.3.0"
++    implementation "androidx.multidex:multidex:2.0.1"
++    implementation 'org.jsoup:jsoup:1.13.1'
++    testImplementation 'junit:junit:4.13.2'
++
++}
+\ No newline at end of file
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Project-wide Gradle settings.\n\n# IDE (e.g. Android Studio) users:\n# Gradle settings configured through the IDE *will override*\n# any settings specified in this file.\n\n# For more details on how to configure your build environment visit\n# http://www.gradle.org/docs/current/userguide/build_environment.html\n\n# Specifies the JVM arguments used for the daemon process.\n# The setting is particularly useful for tweaking memory settings.\n# Default value: -Xmx10248m -XX:MaxPermSize=256m\n# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8\n\n# When configured, Gradle will run in incubating parallel mode.\n# This option should only be used with decoupled projects. More details, visit\n# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects\n# org.gradle.parallel=true
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/gradle.properties	(date 1694156388472)
+@@ -10,9 +10,13 @@
+ # Specifies the JVM arguments used for the daemon process.
+ # The setting is particularly useful for tweaking memory settings.
+ # Default value: -Xmx10248m -XX:MaxPermSize=256m
+-# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+-
++org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+ # When configured, Gradle will run in incubating parallel mode.
+ # This option should only be used with decoupled projects. More details, visit
+ # http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+-# org.gradle.parallel=true
+\ No newline at end of file
++# org.gradle.parallel=true
++android.defaults.buildfeatures.buildconfig=true
++android.enableJetifier=true
++android.nonFinalResIds=false
++android.nonTransitiveRClass=true
++android.useAndroidX=true
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/GetLatestVersion.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/GetLatestVersion.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/GetLatestVersion.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/GetLatestVersion.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,33 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.os.AsyncTask;
+-
+-import org.jsoup.Jsoup;
+-import org.jsoup.nodes.Document;
+-
+-/**
+- * Created by Ali Mansour on 2016-09-06.
+- */
+-public class GetLatestVersion extends AsyncTask<String, String, String> {
+-    String latestVersion;
+-
+-    @Override
+-    protected void onPreExecute() {
+-        super.onPreExecute();
+-    }
+-
+-    @Override
+-    protected String doInBackground(String... params) {
+-        try {
+-            //It retrieves the latest version by scraping the content of current version from play store at runtime
+-            String urlOfAppFromPlayStore = "https://play.google.com/store/apps/details?id=com.tibadev.alimansour.prophetstories";
+-            Document doc = Jsoup.connect(urlOfAppFromPlayStore).get();
+-            latestVersion = doc.getElementsByAttributeValue("itemprop","softwareVersion").first().text();
+-
+-        }catch (Exception e){
+-            e.printStackTrace();
+-
+-        }
+-        return latestVersion;
+-    }
+-}
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/XMLPullParserHandler.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/XMLPullParserHandler.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/XMLPullParserHandler.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/XMLPullParserHandler.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,76 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import org.xmlpull.v1.XmlPullParser;
+-import org.xmlpull.v1.XmlPullParserException;
+-import org.xmlpull.v1.XmlPullParserFactory;
+-
+-import java.io.IOException;
+-import java.io.InputStream;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-/**
+- * Created by Ali Mansour on 5/21/16.
+- */
+-public class XMLPullParserHandler {
+-    List<Story> stories;
+-    private Story story;
+-    private String text;
+-
+-    public XMLPullParserHandler() {
+-        stories = new ArrayList<Story>();
+-    }
+-
+-    public List<Story> getStories() {
+-        return stories;
+-    }
+-
+-    public List<Story> parse(InputStream is) {
+-        XmlPullParserFactory factory = null;
+-        XmlPullParser parser = null;
+-        try {
+-            factory = XmlPullParserFactory.newInstance();
+-            factory.setNamespaceAware(true);
+-            parser = factory.newPullParser();
+-
+-            parser.setInput(is, null);
+-
+-            int eventType = parser.getEventType();
+-            while (eventType != XmlPullParser.END_DOCUMENT) {
+-                String tagname = parser.getName();
+-                switch (eventType) {
+-                    case XmlPullParser.START_TAG:
+-                        if (tagname.equalsIgnoreCase("story")) {
+-                            // create a new instance of story
+-                            story = new Story();
+-                        }
+-                        break;
+-
+-                    case XmlPullParser.TEXT:
+-                        text = parser.getText();
+-                        break;
+-
+-                    case XmlPullParser.END_TAG:
+-                        if (tagname.equalsIgnoreCase("story")) {
+-                            //ToDo: add story object to list
+-                            stories.add(story);
+-                        } else if (tagname.equalsIgnoreCase("content")) {
+-                            story.setContent(text);
+-                        } else if (tagname.equalsIgnoreCase("prophet")) {
+-                            story.setProphet(text);
+-                        }
+-                        break;
+-
+-                    default:
+-                        break;
+-                }
+-                eventType = parser.next();
+-            }
+-        } catch (XmlPullParserException e) {
+-            e.printStackTrace();
+-        } catch (IOException e) {
+-            e.printStackTrace();
+-        }
+-        return stories;
+-    }
+-}
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/NetworkCheck.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/NetworkCheck.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/NetworkCheck.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/NetworkCheck.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,20 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.content.Context;
+-import android.net.ConnectivityManager;
+-import android.net.NetworkInfo;
+-
+-/**
+- * Created by Ali Mansour on 5/25/16.
+- */
+-public class NetworkCheck {
+-    public boolean check(Context context) {
+-        ConnectivityManager cm =
+-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+-
+-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+-        boolean isConnected = activeNetwork != null &&
+-                activeNetwork.isConnectedOrConnecting();
+-        return isConnected;
+-    }
+-}
+\ No newline at end of file
+Index: .idea/encodings.xml
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+deleted file mode 100644
+--- a/.idea/encodings.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="Encoding">
+-    <file url="PROJECT" charset="UTF-8" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/SplashScreen.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/SplashScreen.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/SplashScreen.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/SplashScreen.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,40 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-/**
+- * TibaDev Solutions Inc
+- * Created by Ali Mansour on 2016-09-09.
+- */
+-
+-import android.app.Activity;
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.os.Handler;
+-
+-public class SplashScreen extends Activity {
+-
+-    /**
+-     * Called when the activity is first created.
+-     */
+-    @Override
+-    public void onCreate(Bundle icicle) {
+-        super.onCreate(icicle);
+-        setContentView(R.layout.splash_screen);
+-
+-        /* New Handler to start the Menu-Activity
+-         * and close this Splash-Screen after some seconds.*/
+-        /*
+-      Duration of wait
+-     */
+-        int SPLASH_DISPLAY_LENGTH = 1000;
+-        new Handler().postDelayed(new Runnable() {
+-            @Override
+-            public void run() {
+-
+-                /* Create an Intent that will start the Main Activity. */
+-                Intent mainIntent = new Intent(SplashScreen.this, MainActivity.class);
+-                SplashScreen.this.startActivity(mainIntent);
+-                SplashScreen.this.finish();
+-            }
+-        }, SPLASH_DISPLAY_LENGTH);
+-    }
+-}
+\ No newline at end of file
+Index: app/src/androidTest/java/com/tibadev/alimansour/prophetstories/ApplicationTest.java
+===================================================================
+diff --git a/app/src/androidTest/java/com/tibadev/alimansour/prophetstories/ApplicationTest.java b/app/src/androidTest/java/com/tibadev/alimansour/prophetstories/ApplicationTest.java
+deleted file mode 100644
+--- a/app/src/androidTest/java/com/tibadev/alimansour/prophetstories/ApplicationTest.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,13 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.app.Application;
+-import android.test.ApplicationTestCase;
+-
+-/**
+- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+- */
+-public class ApplicationTest extends ApplicationTestCase<Application> {
+-    public ApplicationTest() {
+-        super(Application.class);
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/MainActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/MainActivity.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/MainActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/MainActivity.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,281 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.content.ActivityNotFoundException;
+-import android.content.Context;
+-import android.content.DialogInterface;
+-import android.content.Intent;
+-import android.content.pm.PackageInfo;
+-import android.content.pm.PackageManager;
+-import android.net.Uri;
+-import android.os.Build;
+-import android.os.Bundle;
+-import android.support.annotation.NonNull;
+-import android.support.v4.view.MenuItemCompat;
+-import android.support.v7.app.AlertDialog;
+-import android.support.v7.app.AppCompatActivity;
+-import android.support.v7.widget.ShareActionProvider;
+-import android.support.v7.widget.Toolbar;
+-import android.view.LayoutInflater;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.AdapterView;
+-import android.widget.ArrayAdapter;
+-import android.widget.ListView;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import com.startapp.android.publish.StartAppAd;
+-import com.startapp.android.publish.StartAppSDK;
+-import com.startapp.android.publish.model.AutoInterstitialPreferences;
+-
+-import java.io.IOException;
+-import java.util.List;
+-import java.util.concurrent.ExecutionException;
+-
+-public class MainActivity extends AppCompatActivity {
+-    ListView listView;
+-    List<Story> stories = null;
+-    String strProphet = null;
+-    String strContent = null;
+-    NetworkCheck networkCheck;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_main);
+-
+-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+-        setSupportActionBar(toolbar);
+-        try {
+-            // Check Device Connectivity & view Ads if it is connected:
+-            NetworkCheck networkCheck = new NetworkCheck();
+-            if (networkCheck.check(this)) {
+-                // Check for updates
+-                String latestVersion = "";
+-                String currentVersion = getCurrentVersion();
+-                try {
+-                    latestVersion = new GetLatestVersion().execute().get();
+-                } catch (InterruptedException | ExecutionException e) {
+-                    e.printStackTrace();
+-                }
+-
+-                // Show Update Alert Dialog at startup if versions are not equal
+-                if (!currentVersion.equals(latestVersion)) {
+-                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+-                    builder.setIcon(R.drawable.ic_launcher);
+-                    builder.setTitle(R.string.text_update_alert_title);
+-                    builder.setMessage(R.string.text_update_alert_message);
+-                    builder.setPositiveButton(R.string.btn_update_alert_update, new DialogInterface.OnClickListener() {
+-                        @Override
+-                        public void onClick(DialogInterface dialog, int which) {
+-                            //Click button action
+-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories")));
+-                            dialog.dismiss();
+-                        }
+-                    });
+-                    builder.setCancelable(false);
+-                    builder.show();
+-                }
+-                // View Ads
+-                StartAppSDK.init(this, "210823214", false);
+-                StartAppAd.disableSplash();
+-                StartAppAd.enableAutoInterstitial();
+-                StartAppAd.setAutoInterstitialPreferences(new AutoInterstitialPreferences().setActivitiesBetweenAds(5));
+-            }
+-
+-            // Check for permissions
+-            try {
+-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+-
+-                    // Check for Access fine location permission
+-                    if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+-                        // Permission is available, start the app
+-                    } else {
+-                        requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+-                    }
+-
+-                    // Should we show an explanation?
+-                    if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+-                        // Explain to the user why we need ACCESS_FINE_LOCATION
+-                        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+-                        builder.setIcon(R.drawable.ic_my_location_black_24dp);
+-                        builder.setTitle("استخدام تحديد المواقع");
+-                        builder.setMessage("التطبيق يقوم باستخدام صلاحية تحديد المواقع في هاتفك لعرض إعلانات مناسبة لك.");
+-                        builder.setPositiveButton("إخفاء", new DialogInterface.OnClickListener() {
+-                            @Override
+-                            public void onClick(DialogInterface dialog, int which) {
+-                                //Click button action
+-                                dialog.dismiss();
+-                            }
+-                        });
+-                        builder.setCancelable(true);
+-                        builder.show();
+-                    }
+-                }
+-            } catch (Exception EX) {
+-            }
+-
+-            listView = (ListView) findViewById(R.id.list);
+-            try {
+-                XMLPullParserHandler parser = new XMLPullParserHandler();
+-                stories = parser.parse(getAssets().open("stories.xml"));
+-                listView.setAdapter(new MyAdapter(this, android.R.layout.simple_list_item_1, stories));
+-            } catch (IOException e) {
+-                e.printStackTrace();
+-            }
+-            final List<Story> finalStories = stories;
+-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+-                @Override
+-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+-                    // Retrieve story data
+-                    strProphet = finalStories.get(position).getProphet();
+-                    strContent = finalStories.get(position).getContent();
+-                    showStory();
+-                }
+-            });
+-        } catch (Exception e) {
+-        }
+-    }
+-
+-    private void showStory() {
+-        Intent intent = new Intent(MainActivity.this, StoryActivity.class);
+-        intent.putExtra("prophet", strProphet);
+-        intent.putExtra("content", strContent);
+-        startActivity(intent);
+-    }
+-
+-    public class MyAdapter extends ArrayAdapter<Story> {
+-
+-
+-        MyAdapter(Context context, int resource, List<Story> objects) {
+-            super(context, resource, objects);
+-        }
+-
+-        @NonNull
+-        @Override
+-        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+-            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+-            View view = inflater.inflate(R.layout.list_item, parent, false);
+-            TextView txtItemCompanion = (TextView) view.findViewById(R.id.txt_item_prophet);
+-            Story story = stories.get(position);
+-            txtItemCompanion.setText(story.getProphet());
+-            return view;
+-        }
+-    }
+-
+-    @Override
+-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+-        try {
+-            if (requestCode == 0) {
+-                // Request for call phone permission.
+-                if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+-                    // Permission request was denied.
+-                    Toast.makeText(this, R.string.text_location_permission_denied, Toast.LENGTH_SHORT).show();
+-                }
+-            }
+-        } catch (Exception EX) {
+-        }
+-    }
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_main, menu);
+-        // Retrieve the share menu item
+-        MenuItem shareItem = menu.findItem(R.id.action_share);
+-
+-        // Now get the ShareActionProvider from the item
+-        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+-        mShareActionProvider.setShareIntent(doShare());
+-
+-        MenuItem rateItem = menu.findItem(R.id.action_rate);
+-        rateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+-            @Override
+-            public boolean onMenuItemClick(MenuItem item) {
+-                Intent intent = new Intent(Intent.ACTION_VIEW);
+-                //Try Google play
+-                intent.setData(Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories"));
+-                if (!MyStartActivity(intent)) {
+-                    //Market (Google play) app seems not installed, let's try to open a webbrowser
+-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"));
+-                    if (!MyStartActivity(intent)) {
+-                        //Well if this also fails, we have run out of options, inform the user.
+-                        Toast.makeText(MainActivity.this, "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.", Toast.LENGTH_SHORT).show();
+-                    }
+-                }
+-                return false;
+-            }
+-        });
+-        return true;
+-    }
+-
+-    // Check for updates
+-    private String getCurrentVersion() {
+-        PackageManager pm = this.getPackageManager();
+-        PackageInfo pInfo = null;
+-
+-        try {
+-            pInfo = pm.getPackageInfo(this.getPackageName(), 0);
+-
+-        } catch (PackageManager.NameNotFoundException e1) {
+-            e1.printStackTrace();
+-        }
+-
+-        assert pInfo != null;
+-        return pInfo.versionName;
+-    }
+-
+-    public Intent doShare() {
+-        // populate the share intent with data
+-        Intent intent = new Intent(Intent.ACTION_SEND);
+-        intent.setType("text/plain");
+-        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد");
+-        intent.putExtra(Intent.EXTRA_TEXT, "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories");
+-        return intent;
+-    }
+-
+-    private boolean MyStartActivity(Intent aIntent) {
+-        try {
+-            startActivity(aIntent);
+-            return true;
+-        } catch (ActivityNotFoundException e) {
+-            return false;
+-        }
+-    }
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        int id = item.getItemId();
+-
+-        //ToDo: noinspection SimplifiableIfStatement
+-        switch (id) {
+-            case R.id.action_our_apps:
+-                Intent intent = new Intent(Intent.ACTION_VIEW);
+-                //Try Google play
+-                intent.setData(Uri.parse("market://dev?id=8256417273842663752"));
+-                if (!MyStartActivity(intent)) {
+-                    //Market (Google play) app seems not installed, let's try to open a webbrowser
+-                    intent.setData(Uri.parse("https://play.google.com/store/apps/dev?id=8256417273842663752"));
+-                    if (!MyStartActivity(intent)) {
+-                        //Well if this also fails, we have run out of options, inform the user.
+-                        Toast.makeText(MainActivity.this, "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.", Toast.LENGTH_SHORT).show();
+-                    }
+-                }
+-                break;
+-            case R.id.action_settings:
+-
+-                break;
+-            case R.id.action_about:
+-                Intent intentabout = new Intent(MainActivity.this, AboutActivity.class);
+-                startActivity(intentabout);
+-                break;
+-        }
+-
+-        return super.onOptionsItemSelected(item);
+-    }
+-}
+Index: .idea/copyright/profiles_settings.xml
+===================================================================
+diff --git a/.idea/copyright/profiles_settings.xml b/.idea/copyright/profiles_settings.xml
+deleted file mode 100644
+--- a/.idea/copyright/profiles_settings.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,3 +0,0 @@
+-<component name="CopyrightManager">
+-  <settings default="" />
+-</component>
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/markdown-navigator/profiles_settings.xml
+===================================================================
+diff --git a/.idea/markdown-navigator/profiles_settings.xml b/.idea/markdown-navigator/profiles_settings.xml
+deleted file mode 100644
+--- a/.idea/markdown-navigator/profiles_settings.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,3 +0,0 @@
+-<component name="MarkdownNavigator.ProfileManager">
+-  <settings default="" pdf-export="" />
+-</component>
+\ No newline at end of file
+Index: .idea/dictionaries/Ali_Mansour.xml
+===================================================================
+diff --git a/.idea/dictionaries/Ali_Mansour.xml b/.idea/dictionaries/Ali_Mansour.xml
+deleted file mode 100644
+--- a/.idea/dictionaries/Ali_Mansour.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,7 +0,0 @@
+-<component name="ProjectDictionaryState">
+-  <dictionary name="Ali Mansour">
+-    <words>
+-      <w>prophetstories</w>
+-    </words>
+-  </dictionary>
+-</component>
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/StoryActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/StoryActivity.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/StoryActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/StoryActivity.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,119 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.content.ActivityNotFoundException;
+-import android.content.Intent;
+-import android.net.Uri;
+-import android.os.Bundle;
+-import android.support.v4.view.MenuItemCompat;
+-import android.support.v7.app.AppCompatActivity;
+-import android.support.v7.widget.ShareActionProvider;
+-import android.util.TypedValue;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.view.View;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-public class StoryActivity extends AppCompatActivity {
+-    private TextView txtProphet, txtContent;
+-    private View adView;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_story);
+-        try {
+-            // Check Device Connectivity & view Ads if it is connected:
+-            adView = findViewById(R.id.startAppBanner_story);
+-            NetworkCheck networkCheck = new NetworkCheck();
+-            if (networkCheck.check(this)) {
+-                adView.setVisibility(View.VISIBLE);
+-            } else {
+-                adView.setVisibility(View.GONE);
+-            }
+-
+-            // Retrieve Prophet story data from the Main Activity
+-            Bundle bundle = getIntent().getExtras();
+-            txtProphet = (TextView) findViewById(R.id.txt_prophet);
+-            txtContent = (TextView) findViewById(R.id.txt_content);
+-            txtProphet.setText(bundle.getString("prophet"));
+-            txtContent.setText(bundle.getString("content"));
+-        } catch (Exception e) {
+-        }
+-    }
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_story, menu);
+-        // Retrieve the share menu item
+-        MenuItem shareItem = menu.findItem(R.id.action_share);
+-
+-        // Now get the ShareActionProvider from the item
+-        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+-        mShareActionProvider.setShareIntent(doShare());
+-
+-        MenuItem rateItem = menu.findItem(R.id.action_rate);
+-        rateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+-            @Override
+-            public boolean onMenuItemClick(MenuItem item) {
+-                Intent intent = new Intent(Intent.ACTION_VIEW);
+-                // Try Google play
+-                intent.setData(Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories"));
+-                if (!MyStartActivity(intent)) {
+-                    // Market (Google play) app seems not installed, let's try to open a webbrowser
+-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"));
+-                    if (!MyStartActivity(intent)) {
+-                        // Well if this also fails, we have run out of options, inform the user.
+-                        Toast.makeText(StoryActivity.this, "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.", Toast.LENGTH_SHORT).show();
+-                    }
+-                }
+-                return false;
+-            }
+-        });
+-        return true;
+-    }
+-
+-    public Intent doShare() {
+-        // populate the share intent with data
+-        Intent intent = new Intent(Intent.ACTION_SEND);
+-        intent.setType("text/plain");
+-        intent.putExtra(Intent.EXTRA_SUBJECT, "قصص الأنبياء - " + txtProphet.getText());
+-        intent.putExtra(Intent.EXTRA_TEXT, "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\n" + txtProphet.getText() + "\n" + txtContent.getText());
+-        return intent;
+-    }
+-
+-    private boolean MyStartActivity(Intent aIntent) {
+-        try {
+-            startActivity(aIntent);
+-            return true;
+-        } catch (ActivityNotFoundException e) {
+-            return false;
+-        }
+-    }
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        int id = item.getItemId();
+-        // noinspection SimplifiableIfStatement
+-        switch (id) {
+-            case R.id.action_size_up:
+-                txtContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, txtContent.getTextSize() + 1);
+-                break;
+-            case R.id.action_size_down:
+-                txtContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, txtContent.getTextSize() - 1);
+-                break;
+-            case R.id.action_settings:
+-
+-                break;
+-            case R.id.action_about:
+-                Intent intent = new Intent(StoryActivity.this, AboutActivity.class);
+-                startActivity(intent);
+-                break;
+-        }
+-        return super.onOptionsItemSelected(item);
+-    }
+-}
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/AboutActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/AboutActivity.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/AboutActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/AboutActivity.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,184 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.content.ActivityNotFoundException;
+-import android.content.Intent;
+-import android.content.pm.PackageInfo;
+-import android.content.pm.PackageManager;
+-import android.net.Uri;
+-import android.support.v4.view.MenuItemCompat;
+-import android.support.v7.app.AppCompatActivity;
+-import android.os.Bundle;
+-import android.support.v7.widget.ShareActionProvider;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.view.View;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-public class AboutActivity extends AppCompatActivity {
+-    private ShareActionProvider mShareActionProvider;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_about);
+-        TextView txt_ver = (TextView) findViewById(R.id.txt_version_value);
+-
+-
+-        //ToDo: Get App version
+-        try {
+-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+-            txt_ver.setText(pInfo.versionName);
+-        } catch (PackageManager.NameNotFoundException e) {
+-            e.printStackTrace();
+-        }
+-
+-        //ToDo: Initialize social icons imgaes
+-        ImageView img_logo, img_facebook, img_twitter, img_youtube, img_linkedin, img_google_plus;
+-
+-        img_logo = (ImageView) findViewById(R.id.img_logo);
+-        img_logo.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("http://www.tibadev.com"));
+-                startActivity(intent);
+-            }
+-        });
+-
+-        img_facebook = (ImageView) findViewById(R.id.img_facebook);
+-        img_facebook.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("https://www.facebook.com/tibadeveg"));
+-                startActivity(intent);
+-            }
+-        });
+-
+-        img_twitter = (ImageView) findViewById(R.id.img_twitter);
+-        img_twitter.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("https://www.twitter.com/tibadeveg"));
+-                startActivity(intent);
+-            }
+-        });
+-
+-        img_youtube = (ImageView) findViewById(R.id.img_youtube);
+-        img_youtube.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("https://www.youtube.com/c/Tibadeveg"));
+-                startActivity(intent);
+-            }
+-        });
+-
+-        img_linkedin = (ImageView) findViewById(R.id.img_linkedin);
+-        img_linkedin.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("https://www.linkedin.com/company/tibadev"));
+-                startActivity(intent);
+-            }
+-        });
+-
+-        img_google_plus = (ImageView) findViewById(R.id.img_google_plus);
+-        img_google_plus.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                Intent intent = new Intent();
+-                intent.setAction(Intent.ACTION_VIEW);
+-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+-                intent.setData(Uri.parse("https://plus.google.com/+Tibadeveg"));
+-                startActivity(intent);
+-            }
+-        });
+-    }
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_main, menu);
+-        // Retrieve the share menu item
+-        MenuItem shareItem = menu.findItem(R.id.action_share);
+-
+-        // Now get the ShareActionProvider from the item
+-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+-        mShareActionProvider.setShareIntent(doShare());
+-
+-        MenuItem rateItem = menu.findItem(R.id.action_rate);
+-        rateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+-            @Override
+-            public boolean onMenuItemClick(MenuItem item) {
+-                Intent intent = new Intent(Intent.ACTION_VIEW);
+-                //Try Google play
+-                intent.setData(Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories"));
+-                if (!MyStartActivity(intent)) {
+-                    //Market (Google play) app seems not installed, let's try to open a webbrowser
+-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"));
+-                    if (!MyStartActivity(intent)) {
+-                        //Well if this also fails, we have run out of options, inform the user.
+-                        Toast.makeText(AboutActivity.this, "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.", Toast.LENGTH_SHORT).show();
+-                    }
+-                }
+-                return false;
+-            }
+-        });
+-        return true;
+-    }
+-
+-    public Intent doShare() {
+-        // populate the share intent with data
+-        Intent intent = new Intent(Intent.ACTION_SEND);
+-        intent.setType("text/plain");
+-        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد");
+-        intent.putExtra(Intent.EXTRA_TEXT, "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories");
+-        return intent;
+-    }
+-
+-    private boolean MyStartActivity(Intent aIntent) {
+-        try {
+-            startActivity(aIntent);
+-            return true;
+-        } catch (ActivityNotFoundException e) {
+-            return false;
+-        }
+-    }
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        int id = item.getItemId();
+-
+-        //ToDo: noinspection SimplifiableIfStatement
+-        switch (id) {
+-            case R.id.action_settings:
+-
+-                break;
+-            case R.id.action_about:
+-                Intent intent = new Intent(AboutActivity.this, AboutActivity.class);
+-                startActivity(intent);
+-                break;
+-        }
+-
+-        return super.onOptionsItemSelected(item);
+-    }
+-}
+-
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/SettingsActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/SettingsActivity.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/SettingsActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/SettingsActivity.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,94 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-import android.content.ActivityNotFoundException;
+-import android.content.Intent;
+-import android.net.Uri;
+-import android.support.v4.view.MenuItemCompat;
+-import android.support.v7.app.AppCompatActivity;
+-import android.os.Bundle;
+-import android.support.v7.widget.ShareActionProvider;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-import android.widget.Toast;
+-
+-public class SettingsActivity extends AppCompatActivity {
+-    private ShareActionProvider mShareActionProvider;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_settings);
+-    }
+-
+-
+-    @Override
+-    public boolean onCreateOptionsMenu(Menu menu) {
+-        // Inflate the menu; this adds items to the action bar if it is present.
+-        getMenuInflater().inflate(R.menu.menu_main, menu);
+-        // Retrieve the share menu item
+-        MenuItem shareItem = menu.findItem(R.id.action_share);
+-
+-        // Now get the ShareActionProvider from the item
+-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+-        mShareActionProvider.setShareIntent(doShare());
+-
+-        MenuItem rateItem = menu.findItem(R.id.action_rate);
+-        rateItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+-            @Override
+-            public boolean onMenuItemClick(MenuItem item) {
+-                Intent intent = new Intent(Intent.ACTION_VIEW);
+-                //Try Google play
+-                intent.setData(Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories"));
+-                if (!MyStartActivity(intent)) {
+-                    //Market (Google play) app seems not installed, let's try to open a webbrowser
+-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"));
+-                    if (!MyStartActivity(intent)) {
+-                        //Well if this also fails, we have run out of options, inform the user.
+-                        Toast.makeText(SettingsActivity.this, "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.", Toast.LENGTH_SHORT).show();
+-                    }
+-                }
+-                return false;
+-            }
+-        });
+-        return true;
+-    }
+-
+-    public Intent doShare() {
+-        // populate the share intent with data
+-        Intent intent = new Intent(Intent.ACTION_SEND);
+-        intent.setType("text/plain");
+-        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد");
+-        intent.putExtra(Intent.EXTRA_TEXT, "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories");
+-        return intent;
+-    }
+-
+-    private boolean MyStartActivity(Intent aIntent) {
+-        try {
+-            startActivity(aIntent);
+-            return true;
+-        } catch (ActivityNotFoundException e) {
+-            return false;
+-        }
+-    }
+-
+-    @Override
+-    public boolean onOptionsItemSelected(MenuItem item) {
+-        // Handle action bar item clicks here. The action bar will
+-        // automatically handle clicks on the Home/Up button, so long
+-        // as you specify a parent activity in AndroidManifest.xml.
+-        int id = item.getItemId();
+-
+-        //ToDo: noinspection SimplifiableIfStatement
+-        switch (id) {
+-            case R.id.action_settings:
+-
+-                break;
+-            case R.id.action_about:
+-                Intent intent = new Intent(SettingsActivity.this, AboutActivity.class);
+-                startActivity(intent);
+-                break;
+-        }
+-
+-        return super.onOptionsItemSelected(item);
+-    }
+-}
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/Story.java
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/Story.java b/app/src/main/java/com/tibadev/alimansour/prophetstories/Story.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tibadev/alimansour/prophetstories/Story.java	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,30 +0,0 @@
+-package com.tibadev.alimansour.prophetstories;
+-
+-/**
+- * Created by Ali Mansour on 5/21/16.
+- */
+-public class Story {
+-    private String prophet;
+-    private String content;
+-
+-    public String getProphet() {
+-        return prophet;
+-    }
+-
+-    public void setProphet(String prophet) {
+-        this.prophet = prophet;
+-    }
+-
+-    public String getContent() {
+-        return content;
+-    }
+-
+-    public void setContent(String content) {
+-        this.content = content;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return prophet;
+-    }
+-}
+\ No newline at end of file
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ /dev/null	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/ProphetsStories.iml" filepath="$PROJECT_DIR$/ProphetsStories.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <resourceExtensions />\n    <wildcardResourcePatterns>\n      <entry name=\"!?*.java\" />\n      <entry name=\"!?*.form\" />\n      <entry name=\"!?*.class\" />\n      <entry name=\"!?*.groovy\" />\n      <entry name=\"!?*.scala\" />\n      <entry name=\"!?*.flex\" />\n      <entry name=\"!?*.kt\" />\n      <entry name=\"!?*.clj\" />\n      <entry name=\"!?*.aj\" />\n    </wildcardResourcePatterns>\n    <annotationProcessing>\n      <profile default=\"true\" name=\"Default\" enabled=\"false\">\n        <processorPath useClasspath=\"true\" />\n      </profile>\n    </annotationProcessing>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/.idea/compiler.xml	(date 1694155741922)
+@@ -1,22 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <resourceExtensions />
+-    <wildcardResourcePatterns>
+-      <entry name="!?*.java" />
+-      <entry name="!?*.form" />
+-      <entry name="!?*.class" />
+-      <entry name="!?*.groovy" />
+-      <entry name="!?*.scala" />
+-      <entry name="!?*.flex" />
+-      <entry name="!?*.kt" />
+-      <entry name="!?*.clj" />
+-      <entry name="!?*.aj" />
+-    </wildcardResourcePatterns>
+-    <annotationProcessing>
+-      <profile default="true" name="Default" enabled="false">
+-        <processorPath useClasspath="true" />
+-      </profile>
+-    </annotationProcessing>
++    <bytecodeTargetLevel target="17" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"NullableNotNullManager\">\n    <option name=\"myDefaultNullable\" value=\"android.support.annotation.Nullable\" />\n    <option name=\"myDefaultNotNull\" value=\"android.support.annotation.NonNull\" />\n    <option name=\"myNullables\">\n      <value>\n        <list size=\"4\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.Nullable\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nullable\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.Nullable\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.Nullable\" />\n        </list>\n      </value>\n    </option>\n    <option name=\"myNotNulls\">\n      <value>\n        <list size=\"4\">\n          <item index=\"0\" class=\"java.lang.String\" itemvalue=\"org.jetbrains.annotations.NotNull\" />\n          <item index=\"1\" class=\"java.lang.String\" itemvalue=\"javax.annotation.Nonnull\" />\n          <item index=\"2\" class=\"java.lang.String\" itemvalue=\"edu.umd.cs.findbugs.annotations.NonNull\" />\n          <item index=\"3\" class=\"java.lang.String\" itemvalue=\"android.support.annotation.NonNull\" />\n        </list>\n      </value>\n    </option>\n  </component>\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" default=\"true\" assert-keyword=\"true\" jdk-15=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n  <component name=\"masterDetails\">\n    <states>\n      <state key=\"ProjectJDKs.UI\">\n        <settings>\n          <last-edited>1.8</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n    </states>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/.idea/misc.xml	(date 1694155741914)
+@@ -1,49 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="NullableNotNullManager">
+-    <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
+-    <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
+-    <option name="myNullables">
+-      <value>
+-        <list size="4">
+-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
+-        </list>
+-      </value>
+-    </option>
+-    <option name="myNotNulls">
+-      <value>
+-        <list size="4">
+-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
+-        </list>
+-      </value>
+-    </option>
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+     <option name="id" value="Android" />
+   </component>
+-  <component name="masterDetails">
+-    <states>
+-      <state key="ProjectJDKs.UI">
+-        <settings>
+-          <last-edited>1.8</last-edited>
+-          <splitter-proportions>
+-            <option name="proportions">
+-              <list>
+-                <option value="0.2" />
+-              </list>
+-            </option>
+-          </splitter-proportions>
+-        </settings>
+-      </state>
+-    </states>
+-  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/kotlinc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/kotlinc.xml b/.idea/kotlinc.xml
+new file mode 100644
+--- /dev/null	(date 1694155741938)
++++ b/.idea/kotlinc.xml	(date 1694155741938)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="KotlinJpsPluginSettings">
++    <option name="version" value="1.9.10" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"distributionType\" value=\"LOCAL\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleHome\" value=\"C:\\Program Files\\Android\\Android Studio\\gradle\\gradle-2.14.1\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/.idea/gradle.xml	(date 1694155741934)
+@@ -3,16 +3,16 @@
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <option name="distributionType" value="LOCAL" />
++        <option name="testRunner" value="GRADLE" />
++        <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.14.1" />
++        <option name="gradleJvm" value="jbr-17" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
+-        <option name="resolveModulePerSourceSet" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1694155741946)
++++ b/.idea/vcs.xml	(date 1694155741946)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/custom_alert_dialog.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/custom_alert_dialog.xml b/app/src/main/res/layout/custom_alert_dialog.xml
+new file mode 100644
+--- /dev/null	(date 1694150759975)
++++ b/app/src/main/res/layout/custom_alert_dialog.xml	(date 1694150759975)
+@@ -0,0 +1,81 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:card_view="http://schemas.android.com/tools">
++
++    <androidx.cardview.widget.CardView
++        style="@style/CardViewStyle"
++        android:background="@android:color/transparent"
++        app:cardCornerRadius="10dp"
++        app:cardUseCompatPadding="true"
++        card_view:cardElevation="1dp">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:fitsSystemWindows="true"
++            android:layoutDirection="rtl"
++            android:orientation="vertical"
++            android:textAlignment="textStart"
++            android:textDirection="rtl">
++
++            <ImageView
++                android:layout_width="85dp"
++                android:layout_height="85dp"
++                android:layout_gravity="center"
++                android:layout_margin="5dp"
++                android:contentDescription="@string/app_name"
++                android:src="@drawable/ic_launcher" />
++
++            <TextView
++                android:id="@+id/title_text_view"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="center"
++                android:layout_margin="5dp"
++                android:textColor="@color/colorPrimaryDark"
++                android:textSize="20sp"
++                android:textStyle="bold" />
++
++            <TextView
++                android:id="@+id/message_text_view"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="center"
++                android:layout_margin="5dp"
++                android:gravity="center_horizontal"
++                android:textColor="@android:color/holo_blue_dark"
++                android:textSize="16sp"
++                android:textStyle="bold" />
++
++            <LinearLayout
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="center"
++                android:layout_margin="10dp">
++
++                <Button
++                    android:id="@+id/apply_button"
++                    style="?android:attr/borderlessButtonStyle"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="center|start"
++                    android:layout_margin="5dp"
++                    android:text="@android:string/ok"
++                    android:textColor="@color/colorPrimaryDark"
++                    android:textStyle="bold" />
++
++                <Button
++                    android:id="@+id/cancel_button"
++                    style="?android:attr/borderlessButtonStyle"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:layout_gravity="center|end"
++                    android:layout_margin="5dp"
++                    android:text="@android:string/cancel"
++                    android:textColor="@color/colorPrimaryDark"
++                    android:textStyle="bold" />
++            </LinearLayout>
++        </LinearLayout>
++    </androidx.cardview.widget.CardView>
++</layout>
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1694155741942)
++++ b/.idea/jarRepositories.xml	(date 1694155741942)
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="MavenRepo" />
++      <option name="name" value="MavenRepo" />
++      <option name="url" value="https://repo.maven.apache.org/maven2/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="Google" />
++      <option name="name" value="Google" />
++      <option name="url" value="https://dl.google.com/dl/android/maven2/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_arrow_right.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_arrow_right.xml b/app/src/main/res/drawable/ic_arrow_right.xml
+new file mode 100644
+--- /dev/null	(date 1694150759971)
++++ b/app/src/main/res/drawable/ic_arrow_right.xml	(date 1694150759971)
+@@ -0,0 +1,10 @@
++<vector android:height="24dp"
++    android:tint="#D6D6D6"
++    android:viewportHeight="24.0"
++    android:viewportWidth="24.0"
++    android:width="24dp"
++    xmlns:android="http://schemas.android.com/apk/res/android">
++    <path
++        android:fillColor="#FF000000"
++        android:pathData="M8.59,16.34l4.58,-4.59 -4.58,-4.59L10,5.75l6,6 -6,6z" />
++</vector>
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SettingsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SettingsActivity.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SettingsActivity.kt
+new file mode 100755
+--- /dev/null	(date 1694155255458)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SettingsActivity.kt	(date 1694155255458)
+@@ -0,0 +1,80 @@
++package com.tibadev.alimansour.prophetstories.activities
++
++import android.content.ActivityNotFoundException
++import android.content.Intent
++import android.net.Uri
++import android.os.Bundle
++import android.view.Menu
++import android.view.MenuItem
++import android.widget.Toast
++import androidx.appcompat.app.AppCompatActivity
++import androidx.appcompat.widget.ShareActionProvider
++import androidx.core.view.MenuItemCompat
++import com.tibadev.alimansour.prophetstories.R
++
++class SettingsActivity : AppCompatActivity() {
++    private lateinit var mShareActionProvider: ShareActionProvider
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_settings)
++    }
++
++    override fun onCreateOptionsMenu(menu: Menu): Boolean {
++        menuInflater.inflate(R.menu.menu_main, menu)
++        val shareItem = menu.findItem(R.id.action_share)
++        mShareActionProvider = MenuItemCompat.getActionProvider(shareItem) as ShareActionProvider
++        mShareActionProvider.setShareIntent(doShare())
++        val rateItem = menu.findItem(R.id.action_rate)
++        rateItem.setOnMenuItemClickListener {
++            val intent = Intent(Intent.ACTION_VIEW)
++            //Try Google play
++            intent.data = Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories")
++            if (!myStartActivity(intent)) {
++                //Market (Google play) app seems not installed, let's try to open a webbrowser
++                intent.data =
++                    Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories")
++                if (!myStartActivity(intent)) {
++                    //Well if this also fails, we have run out of options, inform the user.
++                    Toast.makeText(
++                        this@SettingsActivity,
++                        "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.",
++                        Toast.LENGTH_SHORT
++                    ).show()
++                }
++            }
++            false
++        }
++        return true
++    }
++
++    private fun doShare(): Intent {
++        val intent = Intent(Intent.ACTION_SEND)
++        intent.type = "text/plain"
++        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد")
++        intent.putExtra(
++            Intent.EXTRA_TEXT,
++            "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"
++        )
++        return intent
++    }
++
++    private fun myStartActivity(aIntent: Intent): Boolean {
++        return try {
++            startActivity(aIntent)
++            true
++        } catch (e: ActivityNotFoundException) {
++            false
++        }
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        when (item.itemId) {
++            R.id.action_settings -> {}
++            R.id.action_about -> {
++                val intent = Intent(this@SettingsActivity, AboutActivity::class.java)
++                startActivity(intent)
++            }
++        }
++        return super.onOptionsItemSelected(item)
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/util/AdConfig.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/util/AdConfig.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/AdConfig.kt
+new file mode 100644
+--- /dev/null	(date 1694153721002)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/AdConfig.kt	(date 1694153721002)
+@@ -0,0 +1,43 @@
++package com.tibadev.alimansour.prophetstories.util
++
++import android.content.Context
++import androidx.appcompat.app.AppCompatActivity
++import com.google.android.gms.ads.AdRequest
++import com.google.android.gms.ads.LoadAdError
++import com.google.android.gms.ads.MobileAds
++import com.google.android.gms.ads.RequestConfiguration
++import com.google.android.gms.ads.interstitial.InterstitialAd
++import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
++import com.tibadev.alimansour.prophetstories.R
++
++fun getAdRequest(): AdRequest {
++    val testDeviceIds =
++        listOf(
++            AdRequest.DEVICE_ID_EMULATOR,
++            "2C5D114F97480510E158672ABF2719AD",
++            "147A1C089F81F65CD1C5F563BD30DE80"
++        )
++    val configuration =
++        RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
++    MobileAds.setRequestConfiguration(configuration)
++    return AdRequest.Builder().build()
++}
++
++fun showInterstitialAd(context: Context) {
++    var interstitialAd: InterstitialAd?
++    val adRequest = getAdRequest()
++    InterstitialAd.load(
++        context,
++        context.getString(R.string.admob_interstitial_unit_id),
++        adRequest,
++        object : InterstitialAdLoadCallback() {
++            override fun onAdLoaded(p0: InterstitialAd) {
++                interstitialAd = p0
++                interstitialAd?.show(context as AppCompatActivity)
++            }
++
++            override fun onAdFailedToLoad(p0: LoadAdError) {
++                interstitialAd = null
++            }
++        })
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_story.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.design.widget.CoordinatorLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:fitsSystemWindows=\"true\"\n    android:gravity=\"start\"\n    android:layoutDirection=\"rtl\"\n    android:textAlignment=\"textStart\"\n    android:textDirection=\"rtl\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\">\n\n    <android.support.design.widget.AppBarLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:theme=\"@style/AppTheme.AppBarOverlay\">\n\n    </android.support.design.widget.AppBarLayout>\n\n    <RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n        xmlns:ads=\"http://schemas.android.com/apk/res-auto\"\n        xmlns:tools=\"http://schemas.android.com/tools\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        android:background=\"@drawable/content_background\"\n        android:paddingBottom=\"@dimen/activity_vertical_margin\"\n        android:paddingLeft=\"@dimen/activity_horizontal_margin\"\n        android:paddingRight=\"@dimen/activity_horizontal_margin\"\n        android:paddingTop=\"@dimen/activity_vertical_margin\"\n        tools:context=\"com.tibadev.alimansour.prophetstories.StoryActivity\">\n\n        <com.startapp.android.publish.banner.Banner\n            android:id=\"@+id/startAppBanner_story\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_centerHorizontal=\"true\"\n            android:layout_marginTop=\"16dp\" />\n\n        <TextView\n            android:id=\"@+id/txt_prophet\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_below=\"@+id/startAppBanner_story\"\n            android:layout_centerHorizontal=\"true\"\n            android:layout_marginTop=\"10dp\"\n            android:textAlignment=\"center\"\n            android:textAppearance=\"?android:attr/textAppearanceMedium\"\n            android:textColor=\"@color/colorPrimary\"\n            android:textSize=\"30sp\"\n            android:textStyle=\"bold\" />\n\n        <ScrollView\n            android:id=\"@+id/scrollView\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:layout_below=\"@+id/txt_prophet\"\n            android:layout_centerHorizontal=\"true\"\n            android:layout_marginBottom=\"20dp\"\n            android:layout_marginStart=\"20dp\"\n            android:layout_marginTop=\"10dp\">\n\n            <TextView\n                android:id=\"@+id/txt_content\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_gravity=\"fill_horizontal\"\n                android:layout_marginEnd=\"20dp\"\n                android:layout_marginStart=\"20dp\"\n                android:textAppearance=\"?android:attr/textAppearanceLarge\"\n                android:textColor=\"#414f5b\"\n                android:textSize=\"20sp\"\n                android:textStyle=\"bold\" />\n        </ScrollView>\n\n    </RelativeLayout>\n\n</android.support.design.widget.CoordinatorLayout>\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_story.xml b/app/src/main/res/layout/activity_story.xml
+--- a/app/src/main/res/layout/activity_story.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/activity_story.xml	(date 1694155255462)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:ads="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+@@ -8,18 +9,16 @@
+     android:layoutDirection="rtl"
+     android:textAlignment="textStart"
+     android:textDirection="rtl"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+ 
+-    <android.support.design.widget.AppBarLayout
++    <com.google.android.material.appbar.AppBarLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:theme="@style/AppTheme.AppBarOverlay">
+ 
+-    </android.support.design.widget.AppBarLayout>
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+-        xmlns:tools="http://schemas.android.com/tools"
++    <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="@drawable/content_background"
+@@ -27,23 +26,27 @@
+         android:paddingLeft="@dimen/activity_horizontal_margin"
+         android:paddingRight="@dimen/activity_horizontal_margin"
+         android:paddingTop="@dimen/activity_vertical_margin"
+-        tools:context="com.tibadev.alimansour.prophetstories.StoryActivity">
++        tools:context="com.tibadev.alimansour.prophetstories.activities.StoryActivity">
+ 
+-        <com.startapp.android.publish.banner.Banner
+-            android:id="@+id/startAppBanner_story"
+-            android:layout_width="wrap_content"
++        <com.google.android.gms.ads.AdView
++            android:id="@+id/banner_story"
++            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+-            android:layout_marginTop="16dp" />
++            android:layout_gravity="center_horizontal"
++            android:layout_marginTop="16dp"
++            ads:adSize="SMART_BANNER"
++            ads:adUnitId="@string/banner_unit_id" />
+ 
+         <TextView
+             android:id="@+id/txt_prophet"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:layout_below="@+id/startAppBanner_story"
++            android:layout_below="@+id/banner_story"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="10dp"
+             android:textAlignment="center"
++            tools:text="اسم النبي"
+             android:textAppearance="?android:attr/textAppearanceMedium"
+             android:textColor="@color/colorPrimary"
+             android:textSize="30sp"
+@@ -67,6 +70,7 @@
+                 android:layout_marginEnd="20dp"
+                 android:layout_marginStart="20dp"
+                 android:textAppearance="?android:attr/textAppearanceLarge"
++                tools:text="قصة النبي ستكون مكتوبة في هذا الجزء ويمكن أن تحتوي على أكثر من سطر"
+                 android:textColor="#414f5b"
+                 android:textSize="20sp"
+                 android:textStyle="bold" />
+@@ -74,5 +78,5 @@
+ 
+     </RelativeLayout>
+ 
+-</android.support.design.widget.CoordinatorLayout>
++</androidx.coordinatorlayout.widget.CoordinatorLayout>
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"com.tibadev.alimansour.prophetstories\">\n\n    <uses-feature\n        android:name=\"android.hardware.telephony\"\n        android:required=\"false\" />\n\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n    <uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@drawable/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/AppTheme\">\n\n        <activity\n            android:name=\"com.startapp.android.publish.list3d.List3DActivity\"\n            android:theme=\"@android:style/Theme\" />\n        <activity\n            android:name=\"com.startapp.android.publish.OverlayActivity\"\n            android:configChanges=\"orientation|keyboardHidden|screenSize\"\n            android:theme=\"@android:style/Theme.Translucent\" />\n        <activity\n            android:name=\"com.startapp.android.publish.FullScreenActivity\"\n            android:configChanges=\"orientation|keyboardHidden|screenSize\"\n            android:theme=\"@android:style/Theme\" />\n        <activity android:name=\".SplashScreen\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n        <activity\n            android:name=\".MainActivity\"\n            android:configChanges=\"keyboardHidden|orientation|screenSize\"\n            android:label=\"@string/app_name\"\n            android:theme=\"@style/AppTheme.NoActionBar\">\n        </activity>\n        <activity\n            android:name=\".AboutActivity\"\n            android:configChanges=\"keyboardHidden|orientation|screenSize\"\n            android:label=\"\"\n            android:parentActivityName=\".MainActivity\" />\n        <activity\n            android:name=\".StoryActivity\"\n            android:configChanges=\"keyboardHidden|orientation|screenSize\"\n            android:label=\"\"\n            android:parentActivityName=\".MainActivity\" />\n        <activity\n            android:name=\".SettingsActivity\"\n            android:configChanges=\"keyboardHidden|orientation|screenSize\"\n            android:label=\"\"\n            android:parentActivityName=\".MainActivity\" />\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/AndroidManifest.xml	(date 1694153143233)
+@@ -9,54 +9,47 @@
+     <uses-permission android:name="android.permission.INTERNET" />
+     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+ 
+     <application
++        android:name="androidx.multidex.MultiDexApplication"
+         android:allowBackup="true"
+         android:icon="@drawable/ic_launcher"
+         android:label="@string/app_name"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+ 
+-        <activity
+-            android:name="com.startapp.android.publish.list3d.List3DActivity"
+-            android:theme="@android:style/Theme" />
+-        <activity
+-            android:name="com.startapp.android.publish.OverlayActivity"
+-            android:configChanges="orientation|keyboardHidden|screenSize"
+-            android:theme="@android:style/Theme.Translucent" />
+-        <activity
+-            android:name="com.startapp.android.publish.FullScreenActivity"
+-            android:configChanges="orientation|keyboardHidden|screenSize"
+-            android:theme="@android:style/Theme" />
+-        <activity android:name=".SplashScreen">
++        <meta-data
++            android:name="com.google.android.gms.ads.APPLICATION_ID"
++            android:value="@string/admob_app_id" />
++
++        <activity android:name=".activities.SplashActivity"
++            android:theme="@style/AppTheme.NoActionBar"
++            android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+         <activity
+-            android:name=".MainActivity"
++            android:name=".activities.MainActivity"
+             android:configChanges="keyboardHidden|orientation|screenSize"
+-            android:label="@string/app_name"
+             android:theme="@style/AppTheme.NoActionBar">
+         </activity>
+         <activity
+-            android:name=".AboutActivity"
++            android:name=".activities.AboutActivity"
+             android:configChanges="keyboardHidden|orientation|screenSize"
+             android:label=""
+-            android:parentActivityName=".MainActivity" />
++            android:parentActivityName=".activities.MainActivity" />
+         <activity
+-            android:name=".StoryActivity"
++            android:name=".activities.StoryActivity"
+             android:configChanges="keyboardHidden|orientation|screenSize"
+             android:label=""
+-            android:parentActivityName=".MainActivity" />
++            android:parentActivityName=".activities.MainActivity" />
+         <activity
+-            android:name=".SettingsActivity"
++            android:name=".activities.SettingsActivity"
+             android:configChanges="keyboardHidden|orientation|screenSize"
+             android:label=""
+-            android:parentActivityName=".MainActivity" />
++            android:parentActivityName=".activities.MainActivity" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Sep 28 21:00:29 EET 2017\ndistributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-3.3-all.zip\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1694151484070)
+@@ -1,6 +1,6 @@
+-#Thu Sep 28 21:00:29 EET 2017
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.1.1-bin.zip
++networkTimeout=10000
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-3.3-all.zip
+Index: app/src/main/res/menu/menu_story.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><menu xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:support=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\">\n    <item\n        android:id=\"@+id/action_rate\"\n        android:icon=\"@drawable/ic_action_rate\"\n        android:title=\"@string/action_rate\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_size_up\"\n        android:icon=\"@drawable/ic_action_size_up\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_size_up\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_size_down\"\n        android:icon=\"@drawable/ic_action_size_down\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_size_down\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_share\"\n        android:title=\"@string/action_share\"\n        support:actionProviderClass=\"android.support.v7.widget.ShareActionProvider\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_settings\"\n        android:icon=\"@drawable/ic_action_settings\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_settings\"\n        android:visible=\"false\"\n        support:showAsAction=\"ifRoom\" />\n    <item\n        android:id=\"@+id/action_our_apps\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_our_apps\"\n        support:showAsAction=\"never\" />\n    <item\n        android:id=\"@+id/action_about\"\n        android:icon=\"@drawable/ic_action_about\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_about\"\n        support:showAsAction=\"ifRoom\" />\n</menu>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/menu_story.xml b/app/src/main/res/menu/menu_story.xml
+--- a/app/src/main/res/menu/menu_story.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/menu/menu_story.xml	(date 1694152494729)
+@@ -1,7 +1,7 @@
+ <menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:support="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+     <item
+         android:id="@+id/action_rate"
+         android:icon="@drawable/ic_action_rate"
+@@ -22,7 +22,7 @@
+     <item
+         android:id="@+id/action_share"
+         android:title="@string/action_share"
+-        support:actionProviderClass="android.support.v7.widget.ShareActionProvider"
++        support:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
+         support:showAsAction="always" />
+     <item
+         android:id="@+id/action_settings"
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/activities/StoryActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/StoryActivity.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/StoryActivity.kt
+new file mode 100755
+--- /dev/null	(date 1694155255446)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/StoryActivity.kt	(date 1694155255446)
+@@ -0,0 +1,119 @@
++package com.tibadev.alimansour.prophetstories.activities
++
++import android.content.ActivityNotFoundException
++import android.content.Intent
++import android.net.Uri
++import android.os.Bundle
++import android.util.Log
++import android.util.TypedValue
++import android.view.Menu
++import android.view.MenuItem
++import android.view.View
++import android.widget.TextView
++import android.widget.Toast
++import androidx.appcompat.app.AppCompatActivity
++import androidx.appcompat.widget.ShareActionProvider
++import androidx.core.view.MenuItemCompat
++import com.google.android.gms.ads.AdView
++import com.tibadev.alimansour.prophetstories.R
++import com.tibadev.alimansour.prophetstories.util.Network
++import com.tibadev.alimansour.prophetstories.util.getAdRequest
++
++class StoryActivity : AppCompatActivity() {
++    private lateinit var txtProphet: TextView
++    private lateinit var txtContent: TextView
++    private lateinit var bannerStory: AdView
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_story)
++        try {
++            bannerStory = findViewById(R.id.banner_story)
++            txtProphet = findViewById(R.id.txt_prophet)
++            txtContent = findViewById(R.id.txt_content)
++            bannerStory.loadAd(getAdRequest())
++            intent.extras?.let {
++                txtProphet.text = it.getString("prophet")
++                txtContent.text = it.getString("content")
++            }
++        } catch (e: Exception) {
++            Log.e(javaClass.simpleName, e.message.toString())
++        }
++    }
++
++    override fun onCreateOptionsMenu(menu: Menu): Boolean {
++        menuInflater.inflate(R.menu.menu_story, menu)
++        val shareItem = menu.findItem(R.id.action_share)
++
++        val mShareActionProvider =
++            MenuItemCompat.getActionProvider(shareItem) as ShareActionProvider
++        mShareActionProvider.setShareIntent(doShare())
++        val rateItem = menu.findItem(R.id.action_rate)
++        rateItem.setOnMenuItemClickListener {
++            val intent = Intent(Intent.ACTION_VIEW)
++            // Try Google play
++            intent.data = Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories")
++            if (!myStartActivity(intent)) {
++                // Market (Google play) app seems not installed, let's try to open a webbrowser
++                intent.data =
++                    Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories")
++                if (!myStartActivity(intent)) {
++                    // Well if this also fails, we have run out of options, inform the user.
++                    Toast.makeText(
++                        this@StoryActivity,
++                        "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.",
++                        Toast.LENGTH_SHORT
++                    ).show()
++                }
++            }
++            false
++        }
++        return true
++    }
++
++    private fun doShare(): Intent {
++        // populate the share intent with data
++        val intent = Intent(Intent.ACTION_SEND)
++        intent.type = "text/plain"
++        intent.putExtra(Intent.EXTRA_SUBJECT, "قصص الأنبياء - " + txtProphet.text)
++        intent.putExtra(
++            Intent.EXTRA_TEXT, """
++     قصص الأنبياء - أندرويد
++     طيبة ديف للبرمجيات
++     
++     ${txtProphet.text}
++     ${txtContent.text}
++     """.trimIndent()
++        )
++        return intent
++    }
++
++    private fun myStartActivity(aIntent: Intent): Boolean {
++        return try {
++            startActivity(aIntent)
++            true
++        } catch (e: ActivityNotFoundException) {
++            false
++        }
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        when (item.itemId) {
++            R.id.action_size_up -> txtContent.setTextSize(
++                TypedValue.COMPLEX_UNIT_PX,
++                txtContent.textSize + 1
++            )
++
++            R.id.action_size_down -> txtContent.setTextSize(
++                TypedValue.COMPLEX_UNIT_PX,
++                txtContent.textSize - 1
++            )
++
++            R.id.action_settings -> {}
++            R.id.action_about -> {
++                val intent = Intent(this@StoryActivity, AboutActivity::class.java)
++                startActivity(intent)
++            }
++        }
++        return super.onOptionsItemSelected(item)
++    }
++}
+\ No newline at end of file
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"project_info\": {\n    \"project_number\": \"393365690292\",\n    \"firebase_url\": \"https://my-bills-12dce.firebaseio.com\",\n    \"project_id\": \"my-bills-12dce\",\n    \"storage_bucket\": \"my-bills-12dce.appspot.com\"\n  },\n  \"client\": [\n    {\n      \"client_info\": {\n        \"mobilesdk_app_id\": \"1:393365690292:android:a328d56814589895\",\n        \"android_client_info\": {\n          \"package_name\": \"com.tibadev.alimansour.mybills\"\n        }\n      },\n      \"oauth_client\": [\n        {\n          \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n          \"client_type\": 3\n        }\n      ],\n      \"api_key\": [\n        {\n          \"current_key\": \"AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk\"\n        }\n      ],\n      \"services\": {\n        \"analytics_service\": {\n          \"status\": 1\n        },\n        \"appinvite_service\": {\n          \"status\": 2,\n          \"other_platform_oauth_client\": [\n            {\n              \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n              \"client_type\": 3\n            }\n          ]\n        },\n        \"ads_service\": {\n          \"status\": 2\n        }\n      }\n    },\n    {\n      \"client_info\": {\n        \"mobilesdk_app_id\": \"1:393365690292:android:fab67097a54bc498\",\n        \"android_client_info\": {\n          \"package_name\": \"com.tibadev.androidcodes\"\n        }\n      },\n      \"oauth_client\": [\n        {\n          \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n          \"client_type\": 3\n        }\n      ],\n      \"api_key\": [\n        {\n          \"current_key\": \"AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk\"\n        }\n      ],\n      \"services\": {\n        \"analytics_service\": {\n          \"status\": 1\n        },\n        \"appinvite_service\": {\n          \"status\": 2,\n          \"other_platform_oauth_client\": [\n            {\n              \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n              \"client_type\": 3\n            }\n          ]\n        },\n        \"ads_service\": {\n          \"status\": 2\n        }\n      }\n    },\n    {\n      \"client_info\": {\n        \"mobilesdk_app_id\": \"1:393365690292:android:17fb849366b81085\",\n        \"android_client_info\": {\n          \"package_name\": \"com.tibadev.idealweight\"\n        }\n      },\n      \"oauth_client\": [\n        {\n          \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n          \"client_type\": 3\n        }\n      ],\n      \"api_key\": [\n        {\n          \"current_key\": \"AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk\"\n        }\n      ],\n      \"services\": {\n        \"analytics_service\": {\n          \"status\": 1\n        },\n        \"appinvite_service\": {\n          \"status\": 1,\n          \"other_platform_oauth_client\": []\n        },\n        \"ads_service\": {\n          \"status\": 2\n        }\n      }\n    },\n    {\n      \"client_info\": {\n        \"mobilesdk_app_id\": \"1:393365690292:android:413bcbd90f02a39d\",\n        \"android_client_info\": {\n          \"package_name\": \"com.tibadev.alimansour.prophetstories\"\n        }\n      },\n      \"oauth_client\": [\n        {\n          \"client_id\": \"393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com\",\n          \"client_type\": 3\n        }\n      ],\n      \"api_key\": [\n        {\n          \"current_key\": \"AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk\"\n        }\n      ],\n      \"services\": {\n        \"analytics_service\": {\n          \"status\": 1\n        },\n        \"appinvite_service\": {\n          \"status\": 1,\n          \"other_platform_oauth_client\": []\n        },\n        \"ads_service\": {\n          \"status\": 2\n        }\n      }\n    }\n  ],\n  \"configuration_version\": \"1\"\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/google-services.json b/app/google-services.json
+--- a/app/google-services.json	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/google-services.json	(date 1694156111050)
+@@ -1,142 +1,37 @@
+ {
+   "project_info": {
+-    "project_number": "393365690292",
+-    "firebase_url": "https://my-bills-12dce.firebaseio.com",
+-    "project_id": "my-bills-12dce",
+-    "storage_bucket": "my-bills-12dce.appspot.com"
++    "project_number": "269963128072",
++    "firebase_url": "https://prophets-stories-263c0.firebaseio.com",
++    "project_id": "prophets-stories-263c0",
++    "storage_bucket": "prophets-stories-263c0.appspot.com"
+   },
+   "client": [
+     {
+       "client_info": {
+-        "mobilesdk_app_id": "1:393365690292:android:a328d56814589895",
++        "mobilesdk_app_id": "1:269963128072:android:bc5c40dd478f77972910bd",
+         "android_client_info": {
+-          "package_name": "com.tibadev.alimansour.mybills"
++          "package_name": "com.tibadev.alimansour.prophetstories"
+         }
+       },
+       "oauth_client": [
+         {
+-          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
++          "client_id": "269963128072-j70vhh33puq3eths2ehvbl5hhgrb2vb5.apps.googleusercontent.com",
+           "client_type": 3
+         }
+       ],
+       "api_key": [
+         {
+-          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
++          "current_key": "AIzaSyCgq6ESm4-fbaTAF06N3OM2qr_cloa3Gp4"
+         }
+       ],
+       "services": {
+-        "analytics_service": {
+-          "status": 1
+-        },
+         "appinvite_service": {
+-          "status": 2,
+           "other_platform_oauth_client": [
+             {
+-              "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
++              "client_id": "269963128072-j70vhh33puq3eths2ehvbl5hhgrb2vb5.apps.googleusercontent.com",
+               "client_type": 3
+             }
+           ]
+-        },
+-        "ads_service": {
+-          "status": 2
+-        }
+-      }
+-    },
+-    {
+-      "client_info": {
+-        "mobilesdk_app_id": "1:393365690292:android:fab67097a54bc498",
+-        "android_client_info": {
+-          "package_name": "com.tibadev.androidcodes"
+-        }
+-      },
+-      "oauth_client": [
+-        {
+-          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+-          "client_type": 3
+-        }
+-      ],
+-      "api_key": [
+-        {
+-          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+-        }
+-      ],
+-      "services": {
+-        "analytics_service": {
+-          "status": 1
+-        },
+-        "appinvite_service": {
+-          "status": 2,
+-          "other_platform_oauth_client": [
+-            {
+-              "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+-              "client_type": 3
+-            }
+-          ]
+-        },
+-        "ads_service": {
+-          "status": 2
+-        }
+-      }
+-    },
+-    {
+-      "client_info": {
+-        "mobilesdk_app_id": "1:393365690292:android:17fb849366b81085",
+-        "android_client_info": {
+-          "package_name": "com.tibadev.idealweight"
+-        }
+-      },
+-      "oauth_client": [
+-        {
+-          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+-          "client_type": 3
+-        }
+-      ],
+-      "api_key": [
+-        {
+-          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+-        }
+-      ],
+-      "services": {
+-        "analytics_service": {
+-          "status": 1
+-        },
+-        "appinvite_service": {
+-          "status": 1,
+-          "other_platform_oauth_client": []
+-        },
+-        "ads_service": {
+-          "status": 2
+-        }
+-      }
+-    },
+-    {
+-      "client_info": {
+-        "mobilesdk_app_id": "1:393365690292:android:413bcbd90f02a39d",
+-        "android_client_info": {
+-          "package_name": "com.tibadev.alimansour.prophetstories"
+-        }
+-      },
+-      "oauth_client": [
+-        {
+-          "client_id": "393365690292-m13k5o1gtobkchj4hh2p4q05nthf8eij.apps.googleusercontent.com",
+-          "client_type": 3
+-        }
+-      ],
+-      "api_key": [
+-        {
+-          "current_key": "AIzaSyD2SD5JPxwKlw8KZ3j6yCsbHmAGHDR8BFk"
+-        }
+-      ],
+-      "services": {
+-        "analytics_service": {
+-          "status": 1
+-        },
+-        "appinvite_service": {
+-          "status": 1,
+-          "other_platform_oauth_client": []
+-        },
+-        "ads_service": {
+-          "status": 2
+         }
+       }
+     }
+Index: app/src/main/res/layout/list_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:gravity=\"start\"\n    android:layoutDirection=\"rtl\"\n    android:textAlignment=\"textStart\"\n    android:textDirection=\"rtl\">\n\n    <ImageView\n        android:id=\"@+id/img_icon\"\n        android:layout_width=\"60dp\"\n        android:layout_height=\"60dp\"\n        android:layout_alignParentEnd=\"true\"\n        android:layout_centerVertical=\"true\"\n        android:layout_marginEnd=\"10dp\"\n        android:src=\"@drawable/ic_launcher\" />\n\n    <TextView xmlns:android=\"http://schemas.android.com/apk/res/android\"\n        android:id=\"@+id/txt_item_prophet\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_alignParentStart=\"true\"\n        android:layout_centerVertical=\"true\"\n        android:layout_marginEnd=\"10dp\"\n        android:layout_marginStart=\"10dp\"\n        android:layout_toStartOf=\"@id/img_icon\"\n        android:textAlignment=\"center\"\n        android:textColor=\"@color/colorPrimary\"\n        android:textSize=\"20sp\"\n        android:textStyle=\"bold\" />\n\n\n</RelativeLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/list_item.xml b/app/src/main/res/layout/list_item.xml
+--- a/app/src/main/res/layout/list_item.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/list_item.xml	(date 1694152673492)
+@@ -15,7 +15,7 @@
+         android:layout_alignParentEnd="true"
+         android:layout_centerVertical="true"
+         android:layout_marginEnd="10dp"
+-        android:src="@drawable/ic_launcher" />
++        app:srcCompat="@drawable/ic_launcher" />
+ 
+     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+         android:id="@+id/txt_item_prophet"
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SplashActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SplashActivity.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SplashActivity.kt
+new file mode 100755
+--- /dev/null	(date 1694153721014)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/SplashActivity.kt	(date 1694153721014)
+@@ -0,0 +1,26 @@
++package com.tibadev.alimansour.prophetstories.activities
++
++import android.content.Intent
++import android.os.Bundle
++import android.os.Handler
++import androidx.appcompat.app.AppCompatActivity
++import com.tibadev.alimansour.prophetstories.R
++import kotlinx.coroutines.CoroutineScope
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.delay
++import kotlinx.coroutines.launch
++
++class SplashActivity : AppCompatActivity() {
++
++    public override fun onCreate(icicle: Bundle?) {
++        super.onCreate(icicle)
++        setContentView(R.layout.activity_splash)
++
++        CoroutineScope(Dispatchers.Main).launch {
++            delay(1000L)
++            val mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
++            this@SplashActivity.startActivity(mainIntent)
++            finish()
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/menu/menu_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><menu xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:support=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\">\n    <item\n        android:id=\"@+id/action_rate\"\n        android:icon=\"@drawable/ic_action_rate\"\n        android:title=\"@string/action_rate\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_share\"\n        android:title=\"@string/action_share_app\"\n        support:actionProviderClass=\"android.support.v7.widget.ShareActionProvider\"\n        support:showAsAction=\"always\" />\n    <item\n        android:id=\"@+id/action_settings\"\n        android:icon=\"@drawable/ic_action_settings\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_settings\"\n        android:visible=\"true\"\n        support:showAsAction=\"ifRoom\" />\n    <item\n        android:id=\"@+id/action_our_apps\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_our_apps\"\n        support:showAsAction=\"never\" />\n    <item\n        android:id=\"@+id/action_about\"\n        android:icon=\"@drawable/ic_action_about\"\n        android:orderInCategory=\"100\"\n        android:title=\"@string/action_about\"\n        support:showAsAction=\"ifRoom\" />\n</menu>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/menu_main.xml b/app/src/main/res/menu/menu_main.xml
+--- a/app/src/main/res/menu/menu_main.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/menu/menu_main.xml	(date 1694152494693)
+@@ -1,7 +1,7 @@
+ <menu xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:support="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+     <item
+         android:id="@+id/action_rate"
+         android:icon="@drawable/ic_action_rate"
+@@ -10,7 +10,7 @@
+     <item
+         android:id="@+id/action_share"
+         android:title="@string/action_share_app"
+-        support:actionProviderClass="android.support.v7.widget.ShareActionProvider"
++        support:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
+         support:showAsAction="always" />
+     <item
+         android:id="@+id/action_settings"
+Index: app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n\n    <!-- Base application theme. -->\n    <style name=\"AppTheme\" parent=\"Theme.AppCompat.Light.DarkActionBar\">\n        <!-- Customize your theme here. -->\n        <item name=\"colorPrimary\">@color/colorPrimary</item>\n        <item name=\"colorPrimaryDark\">@color/colorPrimaryDark</item>\n        <item name=\"colorAccent\">@color/colorAccent</item>\n    </style>\n\n    <style name=\"AppTheme.NoActionBar\">\n        <item name=\"windowActionBar\">false</item>\n        <item name=\"windowNoTitle\">true</item>\n    </style>\n\n    <style name=\"AppTheme.AppBarOverlay\" parent=\"ThemeOverlay.AppCompat.Dark.ActionBar\" />\n\n    <style name=\"AppTheme.PopupOverlay\" parent=\"ThemeOverlay.AppCompat.Light\" />\n\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/styles.xml b/app/src/main/res/values/styles.xml
+--- a/app/src/main/res/values/styles.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/values/styles.xml	(date 1694155314046)
+@@ -17,4 +17,23 @@
+ 
+     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+ 
++    <style name="CardViewStyle">
++        <item name="android:layout_width">match_parent</item>
++        <item name="android:layout_height">wrap_content</item>
++        <item name="android:layout_margin">1dp</item>
++        <item name="android:background">@android:color/transparent</item>
++        <item name="android:padding">5dp</item>
++    </style>
++
++    <style name="CardViewTextViewStyle">
++        <item name="android:layout_width">wrap_content</item>
++        <item name="android:layout_height">wrap_content</item>
++        <item name="android:layout_margin">15dp</item>
++        <item name="android:textSize">16sp</item>
++    </style>
++
++    <style name="CardViewTextViewWithDrawableStyle" parent="CardViewTextViewStyle">
++        <item name="android:drawableStart">@drawable/ic_arrow_right</item>
++    </style>
++
+ </resources>
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/activities/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/MainActivity.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/MainActivity.kt
+new file mode 100755
+--- /dev/null	(date 1694156912229)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/MainActivity.kt	(date 1694156912229)
+@@ -0,0 +1,258 @@
++package com.tibadev.alimansour.prophetstories.activities
++
++import android.app.Dialog
++import android.content.ActivityNotFoundException
++import android.content.Context
++import android.content.Intent
++import android.content.pm.PackageInfo
++import android.content.pm.PackageManager
++import android.net.Uri
++import android.os.AsyncTask
++import android.os.Bundle
++import android.util.Log
++import android.view.LayoutInflater
++import android.view.Menu
++import android.view.MenuItem
++import android.view.View
++import android.view.ViewGroup
++import android.view.Window
++import android.widget.AdapterView.OnItemClickListener
++import android.widget.ArrayAdapter
++import android.widget.Button
++import android.widget.ListView
++import android.widget.TextView
++import android.widget.Toast
++import androidx.appcompat.app.AlertDialog
++import androidx.appcompat.app.AppCompatActivity
++import androidx.appcompat.widget.ShareActionProvider
++import androidx.appcompat.widget.Toolbar
++import androidx.core.view.MenuItemCompat
++import com.startapp.android.publish.StartAppAd
++import com.startapp.android.publish.StartAppSDK
++import com.startapp.android.publish.model.AutoInterstitialPreferences
++import com.tibadev.alimansour.prophetstories.BuildConfig
++import com.tibadev.alimansour.prophetstories.R
++import com.tibadev.alimansour.prophetstories.models.Story
++import com.tibadev.alimansour.prophetstories.util.Network
++import com.tibadev.alimansour.prophetstories.util.XMLPullParserHandler
++import com.tibadev.alimansour.prophetstories.util.showInterstitialAd
++import kotlinx.coroutines.CoroutineScope
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.async
++import kotlinx.coroutines.launch
++import org.jsoup.Jsoup
++import java.io.IOException
++import java.util.concurrent.ExecutionException
++
++class MainActivity : AppCompatActivity() {
++    private lateinit var listView: ListView
++    private lateinit var stories: List<Story>
++    private lateinit var strProphet: String
++    private lateinit var strContent: String
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_main)
++        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
++        setSupportActionBar(toolbar)
++        try {
++            val network = Network(this)
++            if (network.isConnected()) checkForUpdates()
++
++            listView = findViewById<View>(R.id.list) as ListView
++            try {
++                val parser = XMLPullParserHandler()
++                stories = parser.parse(assets.open("stories.xml"))
++                listView.adapter = MyAdapter(this, android.R.layout.simple_list_item_1, stories)
++            } catch (e: IOException) {
++                e.printStackTrace()
++            }
++            val finalStories = stories
++            listView.onItemClickListener =
++                OnItemClickListener { _, _, position, _ ->
++                    strProphet = finalStories[position].prophet
++                    strContent = finalStories[position].content
++                    showInterstitialAd(this)
++                    showStory()
++                }
++        } catch (e: Exception) {
++            Log.e(javaClass.simpleName, e.message.toString())
++        }
++    }
++
++    private fun showStory() {
++        val intent = Intent(this@MainActivity, StoryActivity::class.java)
++        intent.putExtra("prophet", strProphet)
++        intent.putExtra("content", strContent)
++        startActivity(intent)
++    }
++
++    inner class MyAdapter internal constructor(
++        context: Context?,
++        resource: Int,
++        objects: List<Story>?
++    ) : ArrayAdapter<Story?>(
++        context!!, resource, objects!!
++    ) {
++        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
++            val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
++            val view = inflater.inflate(R.layout.list_item, parent, false)
++            val txtItemCompanion = view.findViewById<View>(R.id.txt_item_prophet) as TextView
++            val (prophet) = stories[position]
++            txtItemCompanion.text = prophet
++            return view
++        }
++    }
++
++    override fun onCreateOptionsMenu(menu: Menu): Boolean {
++        // Inflate the menu; this adds items to the action bar if it is present.
++        menuInflater.inflate(R.menu.menu_main, menu)
++        // Retrieve the share menu item
++        val shareItem = menu.findItem(R.id.action_share)
++
++        // Now get the ShareActionProvider from the item
++        val mShareActionProvider =
++            MenuItemCompat.getActionProvider(shareItem) as ShareActionProvider
++        mShareActionProvider.setShareIntent(doShare())
++        val rateItem = menu.findItem(R.id.action_rate)
++        rateItem.setOnMenuItemClickListener {
++            val intent = Intent(Intent.ACTION_VIEW)
++            //Try Google play
++            intent.data = Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories")
++            if (!myStartActivity(intent)) {
++                //Market (Google play) app seems not installed, let's try to open a webbrowser
++                intent.data =
++                    Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories")
++                if (!myStartActivity(intent)) {
++                    //Well if this also fails, we have run out of options, inform the user.
++                    Toast.makeText(
++                        this@MainActivity,
++                        "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.",
++                        Toast.LENGTH_SHORT
++                    ).show()
++                }
++            }
++            false
++        }
++        return true
++    }
++
++    private fun doShare(): Intent {
++        // populate the share intent with data
++        val intent = Intent(Intent.ACTION_SEND)
++        intent.type = "text/plain"
++        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد")
++        intent.putExtra(
++            Intent.EXTRA_TEXT,
++            "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"
++        )
++        return intent
++    }
++
++    private fun myStartActivity(aIntent: Intent): Boolean {
++        return try {
++            startActivity(aIntent)
++            true
++        } catch (e: ActivityNotFoundException) {
++            false
++        }
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        // Handle action bar item clicks here. The action bar will
++        // automatically handle clicks on the Home/Up button, so long
++        // as you specify a parent activity in AndroidManifest.xml.
++        when (item.itemId) {
++            R.id.action_our_apps -> {
++                val intent = Intent(Intent.ACTION_VIEW)
++                //Try Google play
++                intent.data = Uri.parse("market://dev?id=8256417273842663752")
++                if (!myStartActivity(intent)) {
++                    //Market (Google play) app seems not installed, let's try to open a webbrowser
++                    intent.data =
++                        Uri.parse("https://play.google.com/store/apps/dev?id=8256417273842663752")
++                    if (!myStartActivity(intent)) {
++                        //Well if this also fails, we have run out of options, inform the user.
++                        Toast.makeText(
++                            this@MainActivity,
++                            "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.",
++                            Toast.LENGTH_SHORT
++                        ).show()
++                    }
++                }
++            }
++
++            R.id.action_settings -> {
++                val intent = Intent(this@MainActivity, AboutActivity::class.java)
++                startActivity(intent)
++            }
++            R.id.action_about -> {
++                val intent = Intent(this@MainActivity, AboutActivity::class.java)
++                startActivity(intent)
++            }
++        }
++        return super.onOptionsItemSelected(item)
++    }
++
++
++    private fun checkForUpdates() {
++        CoroutineScope(Dispatchers.Main).launch {
++            try {
++                val currentVersion = BuildConfig.VERSION_NAME
++                val latestVersion = CoroutineScope(Dispatchers.IO).async {
++                    try {
++                        // retrieve the latest version from play store at runtime
++                        val urlOfAppFromPlayStore =
++                            applicationContext.getString(R.string.app_url) + applicationContext
++                                .packageName
++                        val doc = Jsoup.connect(urlOfAppFromPlayStore).timeout(30000).get()
++                        if (doc != null) {
++                            val element = doc.getElementsContainingOwnText("Current Version")
++                            for (ele in element) {
++                                if (ele.siblingElements() != null) {
++                                    val siblingElements = ele.siblingElements()
++                                    for (sibElement in siblingElements) {
++                                        return@async sibElement.text()
++                                    }
++                                }
++                            }
++                        } else {
++                            return@async ""
++                        }
++                    } catch (e: Exception) {
++                        e.printStackTrace()
++                    }
++                }.await()
++
++                // View Update prompt if the installed version is not the latest published one
++                if (currentVersion != latestVersion) {
++                    val mDialog = Dialog(this@MainActivity)
++                    mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
++                    mDialog.setContentView(R.layout.custom_alert_dialog)
++                    mDialog.setCancelable(false)
++                    val titleTextView = mDialog.findViewById<TextView>(R.id.title_text_view)
++                    val messageTextView = mDialog.findViewById<TextView>(R.id.message_text_view)
++                    val applyButton = mDialog.findViewById<Button>(R.id.apply_button)
++                    val cancelButton = mDialog.findViewById<Button>(R.id.cancel_button)
++                    titleTextView.text = getString(R.string.update_alert_title)
++                    messageTextView.text = getString(R.string.update_alert_message)
++                    applyButton.text = getString(R.string.update_alert_update_button)
++                    cancelButton.text = getString(R.string.alert_later_button)
++                    applyButton.setOnClickListener {
++                        startActivity(
++                            Intent(
++                                Intent.ACTION_VIEW, Uri.parse(
++                                    applicationContext.getString(R.string.app_market_url) + applicationContext.packageName
++                                )
++                            )
++                        )
++                        mDialog.dismiss()
++                    }
++                    cancelButton.setOnClickListener { mDialog.dismiss() }
++                    mDialog.show()
++                }
++            } catch (e: Exception) {
++                e.printStackTrace()
++            }
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <string name=\"app_name\">قصص الأنبياء</string>\n    <string name=\"action_settings\">إعدادات التطبيق</string>\n    <string name=\"action_about\">حول التطبيق</string>\n    <string name=\"text_version\">إصدار رقم: </string>\n    <string name=\"text_developer\">\"تصميم وتطوير م/ علي منصور\"</string>\n    <string name=\"text_about\">\"تطبيق قصص الأنبياء هو تطبيق مجاني من طيبة ديف للبرمجيات ، حيث يمكنك من خلال التطبيق قراءة قصص الأنبياء والرسل عليهم السلام بدءاً من أبينا آدم وحتى سيدنا محمد صلى الله عليه وسلم خاتم الأنبياء والمرسلين. كما يمكنك التطبيق من مشاركة القصة مع أصدقائك  وعلى الشبكات الاجتماعية المختلفة بكل سهولة.\"</string>\n    <string name=\"desc_logo_image\">Logo Image</string>\n    <string name=\"desc_google_plus_icon\">Google plus icon</string>\n    <string name=\"desc_linked_in_icon\">Linked in icon</string>\n    <string name=\"desc_youtube_icon\">Youtube icon</string>\n    <string name=\"desc_twitter_icon\">Twitter icon</string>\n    <string name=\"desc_facebook_icon\">Facebook icon</string>\n    <string name=\"action_rate\">تقييم التطبيق</string>\n    <string name=\"action_share_app\">مشاركة التطبيق</string>\n    <string name=\"action_size_down\">تصغير حجم الخط</string>\n    <string name=\"action_size_up\">تكبير حجم الخط</string>\n    <string name=\"action_share\">مشاركة المحتوى</string>\n    <string name=\"action_our_apps\">تطبيقاتنا الأخرى</string>\n    <string name=\"text_update_alert_message\">لقد أصبح إصدار التطبيق الخاص بك قديماً. يرجى تحديثه لآخر إصدار لضمان الاستمتاع بكافة خدمات ومزايا التطبيق.</string>\n    <string name=\"text_update_alert_title\">تحديث التطبيق</string>\n    <string name=\"btn_update_alert_update\">تحديث الآن</string>\n    <string name=\"text_location_permission_denied\">تم رفض منح التطبيق صلاحية تحديد المواقع.</string>\n</resources>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/values/strings.xml	(date 1694155471976)
+@@ -17,8 +17,24 @@
+     <string name="action_size_up">تكبير حجم الخط</string>
+     <string name="action_share">مشاركة المحتوى</string>
+     <string name="action_our_apps">تطبيقاتنا الأخرى</string>
+-    <string name="text_update_alert_message">لقد أصبح إصدار التطبيق الخاص بك قديماً. يرجى تحديثه لآخر إصدار لضمان الاستمتاع بكافة خدمات ومزايا التطبيق.</string>
+-    <string name="text_update_alert_title">تحديث التطبيق</string>
+-    <string name="btn_update_alert_update">تحديث الآن</string>
++    <string name="update_alert_message">لقد أصبح إصدار التطبيق الخاص بك قديماً. يرجى تحديثه لآخر إصدار لضمان الاستمتاع بكافة خدمات ومزايا التطبيق.</string>
++    <string name="update_alert_title">تحديث التطبيق</string>
++    <string name="update_alert_update_button">تحديث الآن</string>
++    <string name="alert_later_button">ﻻحقاً</string>
+     <string name="text_location_permission_denied">تم رفض منح التطبيق صلاحية تحديد المواقع.</string>
++    <string name="admob_app_id">ca-app-pub-9389457918790198~6877093138</string>
++    <string name="admob_interstitial_unit_id" translatable="false">ca-app-pub-9389457918790198/9910165178</string>
++    <string name="banner_unit_id" translatable="false">ca-app-pub-9389457918790198/5187487384</string>
++    <string name="website_url" translatable="false">https://github.com/dev-ali-mansour</string>
++    <string name="facebook_url" translatable="false">https://www.facebook.com/dev.ali.mansour</string>
++    <string name="twitter_url" translatable="false">https://www.twitter.com/dev_ali_mansour</string>
++    <string name="youtube_channel_url" translatable="false">https://www.youtube.com/channel/UCpaf0uB9V8I_4Ac1DRmNzGQ</string>
++    <string name="linkedin_url" translatable="false">https://www.linkedin.com/in/dev-ali-mansour</string>
++    <string name="support_email" translatable="false">dev.ali.mansour@gmail.com</string>
++    <string name="privacy_policy_url" translatable="false">https://github.com/dev-ali-mansour/privacy-policy</string>
++    <string name="app_url" translatable="false">https://play.google.com/store/apps/details?id=</string>
++    <string name="app_market_url" translatable="false">market://details?id=</string>
++    <string name="our_apps_market_url" translatable="false">market://dev?id=8260943179739148532</string>
++    <string name="our_apps_url" translatable="false">https://play.google.com/store/apps/dev?id=8260943179739148532</string>
++    <string name="privacy_policy">سياسة الخصوصية</string>
+ </resources>
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/activities/AboutActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/AboutActivity.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/AboutActivity.kt
+new file mode 100755
+--- /dev/null	(date 1694154084404)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/activities/AboutActivity.kt	(date 1694154084404)
+@@ -0,0 +1,138 @@
++package com.tibadev.alimansour.prophetstories.activities
++
++import android.content.ActivityNotFoundException
++import android.content.Intent
++import android.content.pm.PackageManager
++import android.net.Uri
++import android.os.Bundle
++import android.view.Menu
++import android.view.MenuItem
++import android.view.View
++import android.widget.ImageView
++import android.widget.TextView
++import android.widget.Toast
++import androidx.appcompat.app.AppCompatActivity
++import androidx.appcompat.widget.ShareActionProvider
++import androidx.core.view.MenuItemCompat
++import com.tibadev.alimansour.prophetstories.R
++
++class AboutActivity : AppCompatActivity() {
++    private lateinit var mShareActionProvider: ShareActionProvider
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_about)
++        val version = findViewById<TextView>(R.id.txt_version_value)
++
++        try {
++            val pInfo = packageManager.getPackageInfo(packageName, 0)
++            version.text = pInfo.versionName
++        } catch (e: PackageManager.NameNotFoundException) {
++            e.printStackTrace()
++        }
++        val imgLogo: ImageView = findViewById(R.id.img_logo)
++        val imgFacebook: ImageView = findViewById(R.id.img_facebook)
++        val imgTwitter: ImageView = findViewById(R.id.img_twitter)
++        val imgYoutube: ImageView = findViewById(R.id.img_youtube)
++        val imgLinkedin: ImageView = findViewById(R.id.img_linkedin)
++
++        imgLogo.setOnClickListener { v: View? ->
++            val intent = Intent()
++            intent.action = Intent.ACTION_VIEW
++            intent.addCategory(Intent.CATEGORY_BROWSABLE)
++            intent.data = Uri.parse(getString(R.string.website_url))
++            startActivity(intent)
++        }
++        imgFacebook.setOnClickListener {
++            val intent = Intent()
++            intent.action = Intent.ACTION_VIEW
++            intent.addCategory(Intent.CATEGORY_BROWSABLE)
++            intent.data = Uri.parse(getString(R.string.facebook_url))
++            startActivity(intent)
++        }
++        imgTwitter.setOnClickListener { v: View? ->
++            val intent = Intent()
++            intent.action = Intent.ACTION_VIEW
++            intent.addCategory(Intent.CATEGORY_BROWSABLE)
++            intent.data = Uri.parse(getString(R.string.twitter_url))
++            startActivity(intent)
++        }
++        imgYoutube.setOnClickListener { v: View? ->
++            val intent = Intent()
++            intent.action = Intent.ACTION_VIEW
++            intent.addCategory(Intent.CATEGORY_BROWSABLE)
++            intent.data = Uri.parse(getString(R.string.youtube_channel_url))
++            startActivity(intent)
++        }
++        imgLinkedin.setOnClickListener { v: View? ->
++            val intent = Intent()
++            intent.action = Intent.ACTION_VIEW
++            intent.addCategory(Intent.CATEGORY_BROWSABLE)
++            intent.data = Uri.parse(getString(R.string.linkedin_url))
++            startActivity(intent)
++        }
++    }
++
++    override fun onCreateOptionsMenu(menu: Menu): Boolean {
++        // Inflate the menu; this adds items to the action bar if it is present.
++        menuInflater.inflate(R.menu.menu_main, menu)
++        // Retrieve the share menu item
++        val shareItem = menu.findItem(R.id.action_share)
++
++        // Now get the ShareActionProvider from the item
++        mShareActionProvider = MenuItemCompat.getActionProvider(shareItem) as ShareActionProvider
++        mShareActionProvider.setShareIntent(doShare())
++        val rateItem = menu.findItem(R.id.action_rate)
++        rateItem.setOnMenuItemClickListener {
++            val intent = Intent(Intent.ACTION_VIEW)
++            //Try Google play
++            intent.data = Uri.parse("market://details?id=com.tibadev.alimansour.prophetstories")
++            if (!myStartActivity(intent)) {
++                //Market (Google play) app seems not installed, let's try to open a webbrowser
++                intent.data =
++                    Uri.parse("https://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories")
++                if (!myStartActivity(intent)) {
++                    //Well if this also fails, we have run out of options, inform the user.
++                    Toast.makeText(
++                        this@AboutActivity,
++                        "عفواً لا يمكن فتح تطبيق جوجل بلاي ، برجاء تثبيت التطبيق.",
++                        Toast.LENGTH_SHORT
++                    ).show()
++                }
++            }
++            false
++        }
++        return true
++    }
++
++    private fun doShare(): Intent {
++        // populate the share intent with data
++        val intent = Intent(Intent.ACTION_SEND)
++        intent.type = "text/plain"
++        intent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق قصص الأنبياء - أندرويد")
++        intent.putExtra(
++            Intent.EXTRA_TEXT,
++            "قصص الأنبياء - أندرويد\nطيبة ديف للبرمجيات\n\nhttps://play.google.com/store/apps/details?com.tibadev.alimansour.prophetstories"
++        )
++        return intent
++    }
++
++    private fun myStartActivity(aIntent: Intent): Boolean {
++        return try {
++            startActivity(aIntent)
++            true
++        } catch (e: ActivityNotFoundException) {
++            false
++        }
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        when (item.itemId) {
++            R.id.action_settings -> {}
++            R.id.action_about -> {
++                val intent = Intent(this@AboutActivity, AboutActivity::class.java)
++                startActivity(intent)
++            }
++        }
++        return super.onOptionsItemSelected(item)
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/util/Network.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/util/Network.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/Network.kt
+new file mode 100644
+--- /dev/null	(date 1694153721010)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/Network.kt	(date 1694153721010)
+@@ -0,0 +1,31 @@
++package com.tibadev.alimansour.prophetstories.util
++
++import android.content.Context
++import android.net.ConnectivityManager
++import android.net.Uri
++import android.widget.Toast
++import androidx.browser.customtabs.CustomTabsIntent
++import androidx.core.content.ContextCompat
++import com.tibadev.alimansour.prophetstories.R
++
++class Network (private val context: Context){
++    fun isConnected(): Boolean {
++        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
++
++        val activeNetwork = cm.activeNetworkInfo
++        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
++    }
++
++    fun openLink(strLink: String) {
++        try {
++            val builder = CustomTabsIntent.Builder()
++            builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary)).setShowTitle(true)
++            builder.setStartAnimations(context, android.R.anim.slide_out_right, android.R.anim.slide_in_left)
++            builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
++            val customTabsIntent = builder.build()
++            customTabsIntent.launchUrl(context, Uri.parse(strLink))
++        } catch (ex: Exception) {
++            Toast.makeText(context, ex.localizedMessage, Toast.LENGTH_SHORT).show()
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/splash_screen.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/splash_screen.xml b/app/src/main/res/layout/activity_splash.xml
+rename from app/src/main/res/layout/splash_screen.xml
+rename to app/src/main/res/layout/activity_splash.xml
+--- a/app/src/main/res/layout/splash_screen.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/activity_splash.xml	(date 1694152673520)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:orientation="vertical">
+@@ -9,6 +10,6 @@
+         android:layout_width="90dp"
+         android:layout_height="90dp"
+         android:layout_centerInParent="true"
+-        android:src="@drawable/ic_launcher" />
++        app:srcCompat="@drawable/ic_launcher" />
+ 
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/util/XMLPullParserHandler.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/util/XMLPullParserHandler.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/XMLPullParserHandler.kt
+new file mode 100755
+--- /dev/null	(date 1694153720986)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/util/XMLPullParserHandler.kt	(date 1694153720986)
+@@ -0,0 +1,53 @@
++package com.tibadev.alimansour.prophetstories.util
++
++import com.tibadev.alimansour.prophetstories.models.Story
++import org.xmlpull.v1.XmlPullParser
++import org.xmlpull.v1.XmlPullParserException
++import org.xmlpull.v1.XmlPullParserFactory
++import java.io.IOException
++import java.io.InputStream
++
++class XMLPullParserHandler {
++    private var _stories: MutableList<Story> = mutableListOf()
++    private lateinit var story: Story
++    private lateinit var text: String
++    val stories:List<Story> = _stories
++
++    fun parse(inputStream: InputStream?): List<Story> {
++        val factory: XmlPullParserFactory
++        val parser: XmlPullParser
++        try {
++            factory = XmlPullParserFactory.newInstance()
++            factory.isNamespaceAware = true
++            parser = factory.newPullParser()
++            parser.setInput(inputStream, null)
++            var eventType = parser.eventType
++            while (eventType != XmlPullParser.END_DOCUMENT) {
++                val tagName = parser.name
++                when (eventType) {
++                    XmlPullParser.START_TAG -> if (tagName.equals("story", ignoreCase = true)) {
++                        story = Story()
++                    }
++
++                    XmlPullParser.TEXT -> text = parser.text
++                    XmlPullParser.END_TAG -> if (tagName.equals("story", ignoreCase = true)) {
++                        //ToDo: add story object to list
++                        _stories.add(story)
++                    } else if (tagName.equals("content", ignoreCase = true)) {
++                        story.content = text
++                    } else if (tagName.equals("prophet", ignoreCase = true)) {
++                        story.prophet = text
++                    }
++
++                    else -> {}
++                }
++                eventType = parser.next()
++            }
++        } catch (e: XmlPullParserException) {
++            e.printStackTrace()
++        } catch (e: IOException) {
++            e.printStackTrace()
++        }
++        return _stories
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.design.widget.CoordinatorLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:background=\"@drawable/list_frame\"\n    android:fitsSystemWindows=\"true\"\n    android:gravity=\"start\"\n    android:layoutDirection=\"rtl\"\n    android:textAlignment=\"textStart\"\n    android:textDirection=\"rtl\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\">\n\n    <android.support.design.widget.AppBarLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:theme=\"@style/AppTheme.AppBarOverlay\">\n\n        <android.support.v7.widget.Toolbar\n            android:id=\"@+id/toolbar\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"?attr/actionBarSize\"\n            android:background=\"?attr/colorPrimary\"\n            app:popupTheme=\"@style/AppTheme.PopupOverlay\" />\n\n    </android.support.design.widget.AppBarLayout>\n\n    <include layout=\"@layout/content_main\" />\n\n</android.support.design.widget.CoordinatorLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1694152494705)
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+@@ -10,22 +10,22 @@
+     android:layoutDirection="rtl"
+     android:textAlignment="textStart"
+     android:textDirection="rtl"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+ 
+-    <android.support.design.widget.AppBarLayout
++    <com.google.android.material.appbar.AppBarLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:theme="@style/AppTheme.AppBarOverlay">
+ 
+-        <android.support.v7.widget.Toolbar
++        <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="?attr/colorPrimary"
+             app:popupTheme="@style/AppTheme.PopupOverlay" />
+ 
+-    </android.support.design.widget.AppBarLayout>
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+     <include layout="@layout/content_main" />
+ 
+-</android.support.design.widget.CoordinatorLayout>
++</androidx.coordinatorlayout.widget.CoordinatorLayout>
+Index: app/src/main/res/layout/activity_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.design.widget.CoordinatorLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:fitsSystemWindows=\"true\"\n    android:gravity=\"start\"\n    android:layoutDirection=\"rtl\"\n    android:textAlignment=\"textStart\"\n    android:textDirection=\"rtl\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\">\n\n    <android.support.design.widget.AppBarLayout\n        android:id=\"@+id/layout_app_bar\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:theme=\"@style/AppTheme.AppBarOverlay\">\n\n        <android.support.v7.widget.Toolbar\n            android:id=\"@+id/toolbar\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"?attr/actionBarSize\"\n            android:background=\"?attr/colorPrimary\"\n            app:popupTheme=\"@style/AppTheme.PopupOverlay\">\n\n            <TextView\n                android:id=\"@+id/txt_title\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_gravity=\"center\"\n                android:text=\"@string/action_settings\"\n                android:textColor=\"#03304b\"\n                android:textSize=\"25sp\"\n                android:textStyle=\"bold\" />\n\n        </android.support.v7.widget.Toolbar>\n\n        <ScrollView\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_below=\"@id/layout_app_bar\"\n            android:layout_margin=\"15dp\">\n\n            <RelativeLayout\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"match_parent\">\n\n            </RelativeLayout>\n        </ScrollView>\n\n    </android.support.design.widget.AppBarLayout>\n\n\n</android.support.design.widget.CoordinatorLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_settings.xml b/app/src/main/res/layout/activity_settings.xml
+--- a/app/src/main/res/layout/activity_settings.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/activity_settings.xml	(date 1694152494709)
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+@@ -9,15 +9,15 @@
+     android:layoutDirection="rtl"
+     android:textAlignment="textStart"
+     android:textDirection="rtl"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+ 
+-    <android.support.design.widget.AppBarLayout
++    <com.google.android.material.appbar.AppBarLayout
+         android:id="@+id/layout_app_bar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:theme="@style/AppTheme.AppBarOverlay">
+ 
+-        <android.support.v7.widget.Toolbar
++        <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+@@ -34,7 +34,7 @@
+                 android:textSize="25sp"
+                 android:textStyle="bold" />
+ 
+-        </android.support.v7.widget.Toolbar>
++        </androidx.appcompat.widget.Toolbar>
+ 
+         <ScrollView
+             android:layout_width="wrap_content"
+@@ -49,7 +49,7 @@
+             </RelativeLayout>
+         </ScrollView>
+ 
+-    </android.support.design.widget.AppBarLayout>
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+ 
+-</android.support.design.widget.CoordinatorLayout>
++</androidx.coordinatorlayout.widget.CoordinatorLayout>
+Index: app/src/main/java/com/tibadev/alimansour/prophetstories/models/Story.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tibadev/alimansour/prophetstories/models/Story.kt b/app/src/main/java/com/tibadev/alimansour/prophetstories/models/Story.kt
+new file mode 100755
+--- /dev/null	(date 1694153721006)
++++ b/app/src/main/java/com/tibadev/alimansour/prophetstories/models/Story.kt	(date 1694153721006)
+@@ -0,0 +1,10 @@
++package com.tibadev.alimansour.prophetstories.models
++
++data class Story(
++    var prophet: String = "",
++    var content: String = ""
++) {
++    override fun toString(): String {
++        return prophet
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_about.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:layoutDirection=\"rtl\"\n    android:textDirection=\"rtl\">\n\n    <android.support.design.widget.AppBarLayout\n        android:id=\"@+id/layout_app_bar\"\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:theme=\"@style/AppTheme.AppBarOverlay\">\n\n        <android.support.v7.widget.Toolbar\n            android:id=\"@+id/toolbar\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"?attr/actionBarSize\"\n            android:background=\"?attr/colorPrimary\"\n            app:popupTheme=\"@style/AppTheme.PopupOverlay\">\n\n            <TextView\n                android:id=\"@+id/txt_title\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_gravity=\"center\"\n                android:text=\"@string/action_about\"\n                android:textColor=\"#03304b\"\n                android:textSize=\"25sp\"\n                android:textStyle=\"bold\" />\n\n        </android.support.v7.widget.Toolbar>\n    </android.support.design.widget.AppBarLayout>\n\n    <ScrollView\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_below=\"@id/layout_app_bar\"\n        android:layout_margin=\"15dp\">\n\n        <RelativeLayout\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\">\n\n            <TextView\n                android:id=\"@+id/txt_version\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_alignParentStart=\"true\"\n                android:layout_marginBottom=\"10dp\"\n                android:text=\"@string/text_version\"\n                android:textSize=\"20sp\"\n                android:textStyle=\"bold\" />\n\n            <TextView\n                android:id=\"@+id/txt_version_value\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginBottom=\"10dp\"\n                android:layout_marginStart=\"10dp\"\n                android:layout_toEndOf=\"@id/txt_version\"\n                android:textSize=\"20sp\"\n                android:textStyle=\"bold\" />\n\n            <TextView\n                android:id=\"@+id/txt_about\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_alignParentStart=\"true\"\n                android:layout_below=\"@id/txt_version\"\n                android:layout_marginBottom=\"10dp\"\n                android:text=\"@string/text_about\"\n                android:textSize=\"20sp\"\n                android:textStyle=\"bold\" />\n\n            <ImageView\n                android:id=\"@+id/img_logo\"\n                android:layout_width=\"240dp\"\n                android:layout_height=\"80dp\"\n                android:layout_below=\"@id/txt_about\"\n                android:layout_centerHorizontal=\"true\"\n                android:contentDescription=\"@string/desc_logo_image\"\n                android:src=\"@drawable/logo\" />\n\n            <RelativeLayout\n                android:id=\"@+id/layout_social_icons\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_below=\"@id/img_logo\">\n\n                <ImageView\n                    android:id=\"@+id/img_youtube\"\n                    android:layout_width=\"40dp\"\n                    android:layout_height=\"40dp\"\n                    android:layout_centerHorizontal=\"true\"\n                    android:layout_margin=\"10dp\"\n                    android:contentDescription=\"@string/desc_youtube_icon\"\n                    android:src=\"@drawable/ic_youtube\" />\n\n                <ImageView\n                    android:id=\"@+id/img_linkedin\"\n                    android:layout_width=\"40dp\"\n                    android:layout_height=\"40dp\"\n                    android:layout_margin=\"10dp\"\n                    android:layout_toStartOf=\"@id/img_youtube\"\n                    android:contentDescription=\"@string/desc_linked_in_icon\"\n                    android:src=\"@drawable/ic_linkedin\" />\n\n                <ImageView\n                    android:id=\"@+id/img_google_plus\"\n                    android:layout_width=\"40dp\"\n                    android:layout_height=\"40dp\"\n                    android:layout_margin=\"10dp\"\n                    android:layout_toStartOf=\"@id/img_linkedin\"\n                    android:contentDescription=\"@string/desc_google_plus_icon\"\n                    android:src=\"@drawable/ic_google_plus\" />\n\n                <ImageView\n                    android:id=\"@+id/img_twitter\"\n                    android:layout_width=\"40dp\"\n                    android:layout_height=\"40dp\"\n                    android:layout_margin=\"10dp\"\n                    android:layout_toEndOf=\"@id/img_youtube\"\n                    android:contentDescription=\"@string/desc_twitter_icon\"\n                    android:src=\"@drawable/ic_twitter\" />\n\n                <ImageView\n                    android:id=\"@+id/img_facebook\"\n                    android:layout_width=\"40dp\"\n                    android:layout_height=\"40dp\"\n                    android:layout_margin=\"10dp\"\n                    android:layout_toEndOf=\"@id/img_twitter\"\n                    android:contentDescription=\"@string/desc_facebook_icon\"\n                    android:src=\"@drawable/ic_facebook\" />\n\n            </RelativeLayout>\n\n        </RelativeLayout>\n    </ScrollView>\n</RelativeLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_about.xml b/app/src/main/res/layout/activity_about.xml
+--- a/app/src/main/res/layout/activity_about.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/activity_about.xml	(date 1694154084388)
+@@ -6,13 +6,13 @@
+     android:layoutDirection="rtl"
+     android:textDirection="rtl">
+ 
+-    <android.support.design.widget.AppBarLayout
++    <com.google.android.material.appbar.AppBarLayout
+         android:id="@+id/layout_app_bar"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:theme="@style/AppTheme.AppBarOverlay">
+ 
+-        <android.support.v7.widget.Toolbar
++        <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+@@ -29,8 +29,8 @@
+                 android:textSize="25sp"
+                 android:textStyle="bold" />
+ 
+-        </android.support.v7.widget.Toolbar>
+-    </android.support.design.widget.AppBarLayout>
++        </androidx.appcompat.widget.Toolbar>
++    </com.google.android.material.appbar.AppBarLayout>
+ 
+     <ScrollView
+         android:layout_width="wrap_content"
+@@ -80,7 +80,7 @@
+                 android:layout_below="@id/txt_about"
+                 android:layout_centerHorizontal="true"
+                 android:contentDescription="@string/desc_logo_image"
+-                android:src="@drawable/logo" />
++                app:srcCompat="@drawable/logo" />
+ 
+             <RelativeLayout
+                 android:id="@+id/layout_social_icons"
+@@ -95,7 +95,7 @@
+                     android:layout_centerHorizontal="true"
+                     android:layout_margin="10dp"
+                     android:contentDescription="@string/desc_youtube_icon"
+-                    android:src="@drawable/ic_youtube" />
++                    app:srcCompat="@drawable/ic_youtube" />
+ 
+                 <ImageView
+                     android:id="@+id/img_linkedin"
+@@ -104,16 +104,7 @@
+                     android:layout_margin="10dp"
+                     android:layout_toStartOf="@id/img_youtube"
+                     android:contentDescription="@string/desc_linked_in_icon"
+-                    android:src="@drawable/ic_linkedin" />
+-
+-                <ImageView
+-                    android:id="@+id/img_google_plus"
+-                    android:layout_width="40dp"
+-                    android:layout_height="40dp"
+-                    android:layout_margin="10dp"
+-                    android:layout_toStartOf="@id/img_linkedin"
+-                    android:contentDescription="@string/desc_google_plus_icon"
+-                    android:src="@drawable/ic_google_plus" />
++                    app:srcCompat="@drawable/ic_linkedin" />
+ 
+                 <ImageView
+                     android:id="@+id/img_twitter"
+@@ -122,7 +113,7 @@
+                     android:layout_margin="10dp"
+                     android:layout_toEndOf="@id/img_youtube"
+                     android:contentDescription="@string/desc_twitter_icon"
+-                    android:src="@drawable/ic_twitter" />
++                    app:srcCompat="@drawable/ic_twitter" />
+ 
+                 <ImageView
+                     android:id="@+id/img_facebook"
+@@ -131,7 +122,7 @@
+                     android:layout_margin="10dp"
+                     android:layout_toEndOf="@id/img_twitter"
+                     android:contentDescription="@string/desc_facebook_icon"
+-                    android:src="@drawable/ic_facebook" />
++                    app:srcCompat="@drawable/ic_facebook" />
+ 
+             </RelativeLayout>
+ 
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\n\nbuildscript {\n    repositories {\n        jcenter()\n    }\n    dependencies {\n        classpath 'com.android.tools.build:gradle:2.3.3'\n        classpath 'com.google.gms:google-services:3.0.0'\n\n\n        // NOTE: Do not place your application dependencies here; they belong\n        // in the individual module build.gradle files\n    }\n}\n\nallprojects {\n    repositories {\n        jcenter()\n    }\n}\n\ntask clean(type: Delete) {\n    delete rootProject.buildDir\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/build.gradle	(date 1694152812910)
+@@ -1,25 +1,24 @@
+ // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ 
+ buildscript {
++    ext {
++        kotlin_version = '1.9.10'
++    }
+     repositories {
+-        jcenter()
++        mavenCentral()
++        google()
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:2.3.3'
+-        classpath 'com.google.gms:google-services:3.0.0'
+-
++        classpath 'com.android.tools.build:gradle:8.1.1'
++        classpath 'com.google.gms:google-services:4.3.15'
++        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
++        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }
+ }
+ 
+-allprojects {
+-    repositories {
+-        jcenter()
+-    }
+-}
+-
+-task clean(type: Delete) {
++tasks.register('clean', Delete) {
+     delete rootProject.buildDir
+ }
+Index: app/src/main/res/layout/content_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:gravity=\"start\"\n    android:layoutDirection=\"rtl\"\n    android:paddingBottom=\"@dimen/activity_vertical_margin\"\n    android:paddingLeft=\"@dimen/activity_horizontal_margin\"\n    android:paddingRight=\"@dimen/activity_horizontal_margin\"\n    android:paddingTop=\"@dimen/activity_vertical_margin\"\n    android:textAlignment=\"textStart\"\n    android:textDirection=\"rtl\"\n    app:layout_behavior=\"@string/appbar_scrolling_view_behavior\"\n    tools:context=\"com.tibadev.alimansour.prophetstories.MainActivity\"\n    tools:showIn=\"@layout/activity_main\">\n\n    <ListView\n        android:id=\"@+id/list\"\n        android:layout_width=\"fill_parent\"\n        android:layout_height=\"fill_parent\"\n        android:layout_marginStart=\"25dp\"\n        android:layout_marginEnd=\"25dp\"/>\n</RelativeLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/content_main.xml b/app/src/main/res/layout/content_main.xml
+--- a/app/src/main/res/layout/content_main.xml	(revision 795ac59933d7c0089bad07292296bc1538abfcc9)
++++ b/app/src/main/res/layout/content_main.xml	(date 1521046663389)
+@@ -13,7 +13,7 @@
+     android:textAlignment="textStart"
+     android:textDirection="rtl"
+     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity"
++    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity"
+     tools:showIn="@layout/activity_main">
+ 
+     <ListView
