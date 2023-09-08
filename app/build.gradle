@@ -1,14 +1,19 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdk 34
     defaultConfig {
         applicationId "com.tibadev.alimansour.prophetstories"
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 6
-        versionName '2.4.0'
+        minSdk 21
+        targetSdk 34
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        versionCode 7
+        versionName '2.5.0'
     }
     buildTypes {
         release {
@@ -18,17 +23,31 @@ android {
     }
     productFlavors {
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    namespace "com.tibadev.alimansour.prophetstories"
+}
+repositories {
+    mavenCentral()
+    google()
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.google.firebase:firebase-core:9.0.2'
-    compile 'com.google.firebase:firebase-crash:9.0.2'
-    compile 'com.google.firebase:firebase-messaging:9.0.2'
-    compile 'org.jsoup:jsoup:1.9.2'
-    compile files('libs/StartAppInApp-3.5.1.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/StartAppInApp-3.5.1.jar')
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.browser:browser:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation platform("com.google.firebase:firebase-bom:31.1.1")
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation "com.google.android.gms:play-services-ads:22.3.0"
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'org.jsoup:jsoup:1.13.1'
+    testImplementation 'junit:junit:4.13.2'
+
 }
-apply plugin: 'com.google.gms.google-services'
