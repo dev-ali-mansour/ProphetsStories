@@ -17,4 +17,23 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="CardViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="CardViewTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CardViewTextViewWithDrawableStyle" parent="CardViewTextViewStyle">
+        <item name="android:drawableStart">@drawable/ic_arrow_right</item>
+    </style>
+
 </resources>

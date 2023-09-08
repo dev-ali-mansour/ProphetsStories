@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,18 +9,16 @@
     android:layoutDirection="rtl"
     android:textAlignment="textStart"
     android:textDirection="rtl"
-    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
+    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/content_background"
@@ -27,23 +26,27 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.tibadev.alimansour.prophetstories.StoryActivity">
+        tools:context="com.tibadev.alimansour.prophetstories.activities.StoryActivity">
 
-        <com.startapp.android.publish.banner.Banner
-            android:id="@+id/startAppBanner_story"
-            android:layout_width="wrap_content"
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/banner_story"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/banner_unit_id" />
 
         <TextView
             android:id="@+id/txt_prophet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/startAppBanner_story"
+            android:layout_below="@+id/banner_story"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
+            tools:text="اسم النبي"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
@@ -67,6 +70,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:text="قصة النبي ستكون مكتوبة في هذا الجزء ويمكن أن تحتوي على أكثر من سطر"
                 android:textColor="#414f5b"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -74,5 +78,5 @@
 
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
