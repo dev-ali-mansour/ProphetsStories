@@ -15,7 +15,8 @@ fun getAdRequest(): AdRequest {
         listOf(
             AdRequest.DEVICE_ID_EMULATOR,
             "2C5D114F97480510E158672ABF2719AD",
-            "147A1C089F81F65CD1C5F563BD30DE80"
+            "147A1C089F81F65CD1C5F563BD30DE80",
+            "2E52323758C25F7E2CB24FFE946F3A75"
         )
     val configuration =
         RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
