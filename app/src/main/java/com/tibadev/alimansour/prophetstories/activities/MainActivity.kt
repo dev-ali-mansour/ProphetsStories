@@ -4,10 +4,7 @@ import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,14 +19,10 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.ShareActionProvider
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
-import com.startapp.android.publish.StartAppAd
-import com.startapp.android.publish.StartAppSDK
-import com.startapp.android.publish.model.AutoInterstitialPreferences
 import com.tibadev.alimansour.prophetstories.BuildConfig
 import com.tibadev.alimansour.prophetstories.R
 import com.tibadev.alimansour.prophetstories.models.Story
@@ -42,7 +35,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import java.io.IOException
-import java.util.concurrent.ExecutionException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var listView: ListView
@@ -180,7 +172,7 @@ class MainActivity : AppCompatActivity() {
                     Uri.parse(getString(R.string.our_apps_market_url))
                 )
             )
-        } catch (exception: android.content.ActivityNotFoundException) {
+        } catch (exception: ActivityNotFoundException) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.our_apps_url))))
         } catch (e: Exception) {
             e.printStackTrace()
