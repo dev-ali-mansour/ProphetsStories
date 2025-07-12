@@ -51,10 +51,11 @@ dependencies {
     implementation(libs.bundles.koin)
     ksp(libs.koin.compiler)
     implementation(libs.timber)
+    implementation(libs.kotlinx.serialization.json)
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
     ksp(libs.koin.compiler)
-//    implementation(project(":data"))
+
     implementation(libs.androidx.core)
     implementation(libs.bundles.lifecycle)
     implementation(platform(libs.compose.bom))
@@ -69,15 +70,6 @@ dependencies {
 
     androidTestImplementation(libs.bundles.app.test)
     debugImplementation(libs.test.compose.ui.test.junit4)
-
-
-
-    implementation ("androidx.appcompat:appcompat:1.6.1")
-    implementation ("com.google.android.material:material:1.9.0")
-    implementation ("androidx.browser:browser:1.6.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("androidx.vectordrawable:vectordrawable:1.1.0")
-    implementation("com.google.android.gms:play-services-ads:22.3.0")
 }
 
 kotlin {
