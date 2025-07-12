@@ -7,7 +7,7 @@ To use this project you need to setup the following tools:
 1. JAVA Development Kit (JDK).
 2. Android IDE like Android Studio or eclipse.
 
-We prefer to use Android Stuio in developing Android project because it is the official Android IDE supported by Google.
+We prefer to use Android Studio in developing Android project because it is the official Android IDE supported by Google.
 and we used it to create this project.
 
 How To use this project?
