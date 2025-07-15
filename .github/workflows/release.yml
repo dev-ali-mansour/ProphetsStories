@@ -41,9 +41,6 @@ jobs:
          java-version: 17
          cache: 'gradle'
 
-     - name: Grant execution permission for gradlew
-       run: chmod +x gradlew
-
      - name: Version Bump
        uses: chkfung/android-version-actions@v1.2.3
        with:
