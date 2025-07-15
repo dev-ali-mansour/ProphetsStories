@@ -4,7 +4,7 @@ import com.tibadev.alimansour.prophetstories.story.presentation.SelectedStoryVie
 import com.tibadev.alimansour.prophetstories.story.presentation.settings.SettingsViewModel
 import com.tibadev.alimansour.prophetstories.story.presentation.story_details.StoryDetailsViewModel
 import com.tibadev.alimansour.prophetstories.story.presentation.story_list.StoryListViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
