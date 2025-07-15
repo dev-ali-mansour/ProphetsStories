@@ -46,9 +46,7 @@ jobs:
        with:
          gradlePath: app/build.gradle.kts
          versionCode: ${{ github.run_number }}
-
-     - name: Show updated versionCode
-       run: grep versionCode app/build.gradle.kts
+         versionName: ${{ github.ref_name }}
 
      - name: Assemble Release Bundle
        run: ./gradlew bundleRelease
