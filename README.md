@@ -1,11 +1,11 @@
 # ProphetsStories
-Android app shows Prophets stories by retrieving data from XML document using Android built in library called "XMLPullParser".
+Android app shows Prophets stories by retrieving data from JSON document using Kotlinx Serialization.
 
 All files and lines of codes in this project are published for training purpose only. and it is not authorized for commercial use.
 
 To use this project you need to setup the following tools:
 1. JAVA Development Kit (JDK).
-2. Android IDE like Android Studio or eclipse.
+2. Android IDE like Android Studio.
 
 We prefer to use Android Studio in developing Android project because it is the official Android IDE supported by Google.
 and we used it to create this project.
