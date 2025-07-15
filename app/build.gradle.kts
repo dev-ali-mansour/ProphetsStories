@@ -16,9 +16,10 @@ android {
         targetSdk = 36
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
-        versionCode = 10
-        versionName = "2.5.3"
+        versionCode = project.findProperty("VERSION_CODE")?.toString()?.toInt() ?: 11
+        versionName = project.findProperty("VERSION_NAME")?.toString() ?: "2.5.4"
     }
+
     buildTypes {
         getByName("release") {
             proguardFiles(
