@@ -1,0 +1,39 @@
+# Build outputs
+build/
+.gradle/
+composeApp/build/
+iosApp/build/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local configuration
+local.properties
+
+# Screenshots (temporary)
+*screenshot.png
+
+# Cursor-specific files (if any)
+.cursor/
+
+# Kotlin/Android
+*.iml
+.externalNativeBuild/
+
+# iOS
+iosApp/iosApp.xcodeproj/xcuserdata/
+iosApp/iosApp.xcworkspace/xcuserdata/
+DerivedData/
+
+# KMP
+.kotlin/

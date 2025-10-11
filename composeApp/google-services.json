@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "269963128072",
+    "firebase_url": "https://prophets-stories-263c0.firebaseio.com",
+    "project_id": "prophets-stories-263c0",
+    "storage_bucket": "prophets-stories-263c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269963128072:android:bc5c40dd478f77972910bd",
+        "android_client_info": {
+          "package_name": "com.tibadev.alimansour.prophetstories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269963128072-j70vhh33puq3eths2ehvbl5hhgrb2vb5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgq6ESm4-fbaTAF06N3OM2qr_cloa3Gp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269963128072-j70vhh33puq3eths2ehvbl5hhgrb2vb5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
