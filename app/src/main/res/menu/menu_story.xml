@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:support="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.tibadev.alimansour.prophetstories.activities.MainActivity">
+    tools:context="com.tibadev.alimansour.prophetstories.MainActivity">
     <item
         android:id="@+id/action_rate"
         android:icon="@drawable/ic_action_rate"
@@ -22,8 +22,15 @@
     <item
         android:id="@+id/action_share"
         android:title="@string/action_share"
-        support:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
+        support:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         support:showAsAction="always" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:visible="false"
+        support:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_our_apps"
         android:orderInCategory="100"

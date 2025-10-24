@@ -6,13 +6,13 @@
     android:layoutDirection="rtl"
     android:textDirection="rtl">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <android.support.design.widget.AppBarLayout
         android:id="@+id/layout_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
+        <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -29,8 +29,8 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:layout_below="@id/txt_about"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/desc_logo_image"
-                app:srcCompat="@drawable/logo" />
+                android:src="@drawable/logo" />
 
             <RelativeLayout
                 android:id="@+id/layout_social_icons"
@@ -95,7 +95,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
                     android:contentDescription="@string/desc_youtube_icon"
-                    app:srcCompat="@drawable/ic_youtube" />
+                    android:src="@drawable/ic_youtube" />
 
                 <ImageView
                     android:id="@+id/img_linkedin"
@@ -104,7 +104,16 @@
                     android:layout_margin="10dp"
                     android:layout_toStartOf="@id/img_youtube"
                     android:contentDescription="@string/desc_linked_in_icon"
-                    app:srcCompat="@drawable/ic_linkedin" />
+                    android:src="@drawable/ic_linkedin" />
+
+                <ImageView
+                    android:id="@+id/img_google_plus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_toStartOf="@id/img_linkedin"
+                    android:contentDescription="@string/desc_google_plus_icon"
+                    android:src="@drawable/ic_google_plus" />
 
                 <ImageView
                     android:id="@+id/img_twitter"
@@ -113,7 +122,7 @@
                     android:layout_margin="10dp"
                     android:layout_toEndOf="@id/img_youtube"
                     android:contentDescription="@string/desc_twitter_icon"
-                    app:srcCompat="@drawable/ic_twitter" />
+                    android:src="@drawable/ic_twitter" />
 
                 <ImageView
                     android:id="@+id/img_facebook"
@@ -122,7 +131,7 @@
                     android:layout_margin="10dp"
                     android:layout_toEndOf="@id/img_twitter"
                     android:contentDescription="@string/desc_facebook_icon"
-                    app:srcCompat="@drawable/ic_facebook" />
+                    android:src="@drawable/ic_facebook" />
 
             </RelativeLayout>
 
