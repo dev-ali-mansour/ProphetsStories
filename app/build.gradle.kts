@@ -12,7 +12,7 @@ android {
     compileSdk = 36
     defaultConfig {
         applicationId = "com.tibadev.alimansour.prophetstories"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
