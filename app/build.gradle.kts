@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.multidex)
     implementation(libs.splashScreen)
 
+    testImplementation(libs.bundles.domain.test)
     androidTestImplementation(libs.bundles.app.test)
     debugImplementation(libs.test.compose.ui.test.junit4)
 }

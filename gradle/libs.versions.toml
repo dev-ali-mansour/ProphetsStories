@@ -56,7 +56,6 @@ app-update = { module = "com.google.android.play:app-update-ktx", version.ref = 
 browser = { module = "androidx.browser:browser", version.ref = "androidxBrowser" }
 multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-coroutine-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "ktxSerialization" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
@@ -82,7 +81,7 @@ koin = ["koin-annotations", "koin-compiler", "koin-androidx-workmanager", "koin-
 coil = ["coil-compose", "coil-gif"]
 firebase = ["firebase-crashlytics", "firebase-analytics", "firebase-messaging"]
 lifecycle = ["lifecycle", "lifecycle-process"]
-domain-test = ["junit", "coroutines-android", "coroutines-test", "google-truth", "mockito-inline"]
+domain-test = ["junit", "coroutines-test", "google-truth", "mockito-inline"]
 app-test = ["mockito-inline", "google-truth", "test-compose-ui", "test-compose-ui-mainfest"]
 
 [plugins]
