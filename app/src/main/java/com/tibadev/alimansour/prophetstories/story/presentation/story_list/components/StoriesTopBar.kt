@@ -44,7 +44,7 @@ fun StoriesTopBar(
         actions = {
             IconButton(onClick = onSettingsClicked) {
                 Icon(
-                    painter = painterResource(R.drawable.core_ui_ic_arrow_back),
+                    painter = painterResource(R.drawable.ic_action_settings),
                     contentDescription = null,
                 )
             }

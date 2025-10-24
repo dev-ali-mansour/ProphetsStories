@@ -16,8 +16,8 @@ android {
         targetSdk = 36
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
-        versionCode = project.findProperty("VERSION_CODE")?.toString()?.toInt() ?: 11
-        versionName = project.findProperty("VERSION_NAME")?.toString() ?: "2.5.4"
+        versionCode = project.findProperty("VERSION_CODE")?.toString()?.toInt() ?: 12
+        versionName = project.findProperty("VERSION_NAME")?.toString() ?: "2.5.5"
     }
 
     buildTypes {
