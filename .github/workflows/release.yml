@@ -22,12 +22,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore google-services.json from secret
+        run: |
+          echo "Restoring google-services.json for Android build (from secret)."
+          mkdir -p app
+          echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > app/google-services.json
+
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 17
-          cache: 'gradle'
 
       - name: Cache Gradle files
         uses: actions/cache@v4
@@ -49,6 +54,11 @@ jobs:
     name: Distribute bundle to Google Play
     needs: test
     runs-on: ubuntu-latest
+
+    env:
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
@@ -87,9 +97,9 @@ jobs:
         with:
           releaseDirectory: app/build/outputs/bundle/release
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          keyStorePassword: ${{ env.KEYSTORE_PASSWORD }}
+          alias: ${{ env.KEY_ALIAS }}
+          keyPassword: ${{ env.KEY_PASSWORD }}
 
       - name: Setup Authorization with Google Play Store
         run: echo '${{ secrets.GOOGLE_PLAY_AUTH_JSON }}' > service_account.json
