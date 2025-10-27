@@ -8,6 +8,9 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
 }
 
+val dynamicVersionCode: Int? = System.getenv("VERSION_CODE")?.toIntOrNull()
+val dynamicVersionName: String? = System.getenv("VERSION_NAME")
+
 android {
     compileSdk = 36
     defaultConfig {
@@ -16,8 +19,8 @@ android {
         targetSdk = 36
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
-        versionCode = project.findProperty("VERSION_CODE")?.toString()?.toInt() ?: 13
-        versionName = project.findProperty("VERSION_NAME")?.toString() ?: "2.5.6"
+        versionCode = dynamicVersionCode ?: 13
+        versionName = dynamicVersionName ?: "2.5.6"
     }
 
     buildTypes {

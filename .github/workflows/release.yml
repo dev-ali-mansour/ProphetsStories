@@ -95,6 +95,15 @@ jobs:
           versionCode: ${{ github.run_number }}
           versionName: ${{ github.ref_name }}
 
+      - name: Print Version Info
+        shell: bash
+        run: |
+          echo "Planned versionName (from tag): ${{ github.ref_name }}"
+          echo "Planned versionCode (from run): ${{ github.run_number }}"
+          # Use environment variables set in previous step for version info
+          echo "Resolved versionName (from env): ${VERSION_NAME:-${{ github.ref_name }}}"
+          echo "Resolved versionCode (from env): ${VERSION_CODE:-${{ github.run_number }}}"
+
       - name: Assemble Release Bundle
         run: ./gradlew bundleRelease
 
