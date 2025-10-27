@@ -95,6 +95,23 @@ jobs:
           versionCode: ${{ github.run_number }}
           versionName: ${{ github.ref_name }}
 
+      - name: Print Version Info
+        shell: bash
+        run: |
+          echo "Planned versionName (from tag): ${{ github.ref_name }}"
+          echo "Planned versionCode (from run): ${{ github.run_number }}"
+          # Try to read values written into Gradle file (supports both literal and dynamic fallback patterns)
+          VERSION_NAME=$(sed -nE 's/.*versionName\s*=\s*"([^"]+)".*/\1/p' app/build.gradle.kts | head -n1)
+          if [ -z "$VERSION_NAME" ]; then
+            VERSION_NAME=$(sed -nE 's/.*versionName\s*=\s*dynamicVersionName\s*\?:\s*"([^"]+)".*/\1/p' app/build.gradle.kts | head -n1)
+          fi
+          VERSION_CODE=$(sed -nE 's/.*versionCode\s*=\s*([0-9]+).*/\1/p' app/build.gradle.kts | head -n1)
+          if [ -z "$VERSION_CODE" ]; then
+            VERSION_CODE=$(sed -nE 's/.*versionCode\s*=\s*dynamicVersionCode\s*\?:\s*([0-9]+).*/\1/p' app/build.gradle.kts | head -n1)
+          fi
+          echo "Resolved versionName (from Gradle): ${VERSION_NAME:-unknown}"
+          echo "Resolved versionCode (from Gradle): ${VERSION_CODE:-unknown}"
+
       - name: Assemble Release Bundle
         run: ./gradlew bundleRelease
 
